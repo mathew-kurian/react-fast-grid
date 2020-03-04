@@ -1,6 +1,6 @@
 {
   "name": "react-fast-grid",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "main": "./lib/Grid.js",
   "typings": "./lib/Grid.d.ts",
   "scripts": {
@@ -17,7 +17,7 @@
     "react"
   ],
   "author": "Mathew Kurian <mwkurian@gmail.com.com>",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mathew-kurian/react-fast-grid.git"
@@ -28,12 +28,12 @@
   "homepage": "https://github.com/mathew-kurian/react-fast-grid#readme",
   "description": "Useful Grid algorithm from Material-UI (https://github.com/mui-org/material-ui)",
   "dependencies": {
-    "@material-ui/styles": "4.9.0",
-    "clsx": "1.1.0"
+    "clsx": "1.1.0",
+    "react-jss": "^8.6.1"
   },
   "peerDependencies": {
-    "react": "^15.0.0",
-    "react-dom": "^15.0.0"
+    "react": ">=15",
+    "react-dom": ">=15"
   },
   "devDependencies": {
     "@types/react": "16.9.19",

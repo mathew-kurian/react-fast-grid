@@ -5,3 +5,4 @@ yarn.lock
 *.log
 lib/
 .DS_Store
+package-lock.json

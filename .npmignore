@@ -4,3 +4,4 @@ tsconfig.json
 .gitignore
 .vscode/
 .github
+.DS_Store

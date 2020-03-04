@@ -10,11 +10,11 @@
 // - https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 
 import * as React from "react";
-
 import clsx from "clsx";
-import { withStyles } from "@material-ui/styles";
 import { breakpoints, generateGutter, generateGrid } from "./gridHelpers";
 import { Breakpoint } from './createBreakPoints';
+// @ts-ignore
+import injectSheet from 'react-jss'
 
 // Default CSS values
 // flex: '0 1 auto',
@@ -22,7 +22,7 @@ import { Breakpoint } from './createBreakPoints';
 // alignItems: 'flex-start',
 // flexWrap: 'nowrap',
 // justifyContent: 'flex-start',
-export const styles = () => ({
+export const styles = {
   /* Styles applied to the root element */
   root: {},
   /* Styles applied to the root element if `container={true}`. */
@@ -123,19 +123,7 @@ export const styles = () => ({
     generateGrid(accumulator, key);
     return accumulator;
   }, {})
-});
-
-// const css = styleBlock => {
-//   const className = someHash(styleBlock);
-//   const styleEl = document.createElement('style');
-//   styleEl.textContent = `
-//     .${className} {
-//       ${styleBlock}
-//     }
-//   `;
-//   document.head.appendChild(styleEl);
-//   return className;
-// };
+};
 
 export type GridSize =
   | boolean
@@ -153,87 +141,87 @@ export type GridSize =
   | 11
   | 12;
 
-const Grid = React.forwardRef<
-  any, // D extends React.ElementType = 'div'
-  {
-    alignContent?:
-    | "stretch"
-    | "center"
-    | "flex-start"
-    | "flex-end"
-    | "space-between"
-    | "space-around";
-    alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
-    children?: React.ReactNode;
-    className?: string;
-    component?: any;
-    spacing?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-    classes: any;
-    container?: boolean;
-    direction?: "row" | "row-reverse" | "column" | "column-reverse";
-    item?: boolean;
-    justify?:
-    | "flex-start"
-    | "center"
-    | "flex-end"
-    | "space-between"
-    | "space-around"
-    | "space-evenly";
-    lg?: GridSize;
-    md?: GridSize;
-    sm?: GridSize;
-    xl?: GridSize;
-    xs?: GridSize;
-    wrap?: "nowrap" | "wrap" | "wrap-reverse";
-    zeroMinWidth?: boolean;
-    style?: React.CSSProperties;
+// TODO update to use SFC/FunctionComponent
+class Grid extends React.Component<{
+  alignContent?:
+  | "stretch"
+  | "center"
+  | "flex-start"
+  | "flex-end"
+  | "space-between"
+  | "space-around";
+  alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
+  children?: React.ReactNode;
+  className?: string;
+  component?: any;
+  spacing?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+  container?: boolean;
+  direction?: "row" | "row-reverse" | "column" | "column-reverse";
+  item?: boolean;
+  classes?: any,
+  justify?:
+  | "flex-start"
+  | "center"
+  | "flex-end"
+  | "space-between"
+  | "space-around"
+  | "space-evenly";
+  lg?: GridSize;
+  md?: GridSize;
+  sm?: GridSize;
+  xl?: GridSize;
+  xs?: GridSize;
+  wrap?: "nowrap" | "wrap" | "wrap-reverse";
+  zeroMinWidth?: boolean;
+  style?: React.CSSProperties;
+}>{
+  render() {
+    const {
+      classes,
+      alignContent = "stretch",
+      alignItems = "stretch",
+      className: classNameProp,
+      component: Component = "div",
+      container = false,
+      direction = "row",
+      item = false,
+      justify = "flex-start",
+      lg = false,
+      md = false,
+      sm = false,
+      spacing = 0,
+      wrap = "wrap",
+      xl = false,
+      xs = false,
+      zeroMinWidth = false,
+      ...other
+    } = this.props;
+
+    const className = clsx(
+      classes.root,
+      {
+        [classes.container]: container,
+        [classes.item]: item,
+        [classes.zeroMinWidth]: zeroMinWidth,
+        [classes[`spacing-xs-${String(spacing)}`]]: container && spacing !== 0,
+        [classes[`direction-xs-${String(direction)}`]]: direction !== "row",
+        [classes[`wrap-xs-${String(wrap)}`]]: wrap !== "wrap",
+        [classes[`align-items-xs-${String(alignItems)}`]]:
+          alignItems !== "stretch",
+        [classes[`align-content-xs-${String(alignContent)}`]]:
+          alignContent !== "stretch",
+        [classes[`justify-xs-${String(justify)}`]]: justify !== "flex-start",
+        [classes[`grid-xs-${String(xs)}`]]: xs !== false,
+        [classes[`grid-sm-${String(sm)}`]]: sm !== false,
+        [classes[`grid-md-${String(md)}`]]: md !== false,
+        [classes[`grid-lg-${String(lg)}`]]: lg !== false,
+        [classes[`grid-xl-${String(xl)}`]]: xl !== false
+      },
+      classNameProp
+    );
+
+    return <Component className={className} {...other} />;
   }
->(function Grid(props, ref) {
-  const {
-    alignContent = "stretch",
-    alignItems = "stretch",
-    classes,
-    className: classNameProp,
-    component: Component = "div",
-    container = false,
-    direction = "row",
-    item = false,
-    justify = "flex-start",
-    lg = false,
-    md = false,
-    sm = false,
-    spacing = 0,
-    wrap = "wrap",
-    xl = false,
-    xs = false,
-    zeroMinWidth = false,
-    ...other
-  } = props;
+};
 
-  const className = clsx(
-    classes.root,
-    {
-      [classes.container]: container,
-      [classes.item]: item,
-      [classes.zeroMinWidth]: zeroMinWidth,
-      [classes[`spacing-xs-${String(spacing)}`]]: container && spacing !== 0,
-      [classes[`direction-xs-${String(direction)}`]]: direction !== "row",
-      [classes[`wrap-xs-${String(wrap)}`]]: wrap !== "wrap",
-      [classes[`align-items-xs-${String(alignItems)}`]]:
-        alignItems !== "stretch",
-      [classes[`align-content-xs-${String(alignContent)}`]]:
-        alignContent !== "stretch",
-      [classes[`justify-xs-${String(justify)}`]]: justify !== "flex-start",
-      [classes[`grid-xs-${String(xs)}`]]: xs !== false,
-      [classes[`grid-sm-${String(sm)}`]]: sm !== false,
-      [classes[`grid-md-${String(md)}`]]: md !== false,
-      [classes[`grid-lg-${String(lg)}`]]: lg !== false,
-      [classes[`grid-xl-${String(xl)}`]]: xl !== false
-    },
-    classNameProp
-  );
-
-  return <Component className={className} ref={ref} {...other} />;
-});
-
-export default withStyles(styles, { name: "StyledGrid" })(Grid);
+export default injectSheet(styles)(Grid);
