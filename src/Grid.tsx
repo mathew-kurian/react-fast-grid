@@ -145,7 +145,7 @@ export type GridSize =
   | 12;
 
 // TODO update to use SFC/FunctionComponent
-class Grid extends React.Component<{
+const Grid: React.FunctionComponent<{
   alignContent?:
   | "stretch"
   | "center"
@@ -177,61 +177,57 @@ class Grid extends React.Component<{
   wrap?: "nowrap" | "wrap" | "wrap-reverse";
   zeroMinWidth?: boolean;
   style?: React.CSSProperties;
-}>{
-  render() {
-    const props = this.props;
+}> = props => {
+  const {
+    classes,
+    alignContent = "stretch",
+    alignItems = "stretch",
+    className: classNameProp,
+    component: Component = "div",
+    container = false,
+    direction = "row",
+    item = false,
+    justify = "flex-start",
+    lg = false,
+    md = false,
+    sm = false,
+    spacing = 0,
+    wrap = "wrap",
+    xl = false,
+    xs = false,
+    zeroMinWidth = false,
+    ...other
+  } = props;
 
-    const {
-      classes,
-      alignContent = "stretch",
-      alignItems = "stretch",
-      className: classNameProp,
-      component: Component = "div",
-      container = false,
-      direction = "row",
-      item = false,
-      justify = "flex-start",
-      lg = false,
-      md = false,
-      sm = false,
-      spacing = 0,
-      wrap = "wrap",
-      xl = false,
-      xs = false,
-      zeroMinWidth = false,
-      ...other
-    } = props;
-
-    const className = clsx(
-      classes.root,
-      {
-        [classes.container]: container,
-        [classes.item]: item,
-        [classes.flex]: props.hasOwnProperty('justify') || 
-        props.hasOwnProperty('alignContent') || 
-        props.hasOwnProperty('alignItems') || 
-        props.hasOwnProperty('wrap') || 
+  const className = clsx(
+    classes.root,
+    {
+      [classes.container]: container,
+      [classes.item]: item,
+      [classes.flex]: props.hasOwnProperty('justify') ||
+        props.hasOwnProperty('alignContent') ||
+        props.hasOwnProperty('alignItems') ||
+        props.hasOwnProperty('wrap') ||
         props.hasOwnProperty('direction'),
-        [classes.zeroMinWidth]: zeroMinWidth,
-        [classes[`spacing-xs-${String(spacing)}`]]: container && spacing !== 0,
-        [classes[`direction-xs-${String(direction)}`]]: direction !== "row",
-        [classes[`wrap-xs-${String(wrap)}`]]: wrap !== "wrap",
-        [classes[`align-items-xs-${String(alignItems)}`]]:
-          alignItems !== "stretch",
-        [classes[`align-content-xs-${String(alignContent)}`]]:
-          alignContent !== "stretch",
-        [classes[`justify-xs-${String(justify)}`]]: justify !== "flex-start",
-        [classes[`grid-xs-${String(xs)}`]]: xs !== false,
-        [classes[`grid-sm-${String(sm)}`]]: sm !== false,
-        [classes[`grid-md-${String(md)}`]]: md !== false,
-        [classes[`grid-lg-${String(lg)}`]]: lg !== false,
-        [classes[`grid-xl-${String(xl)}`]]: xl !== false,
-      },
-      classNameProp
-    );
+      [classes.zeroMinWidth]: zeroMinWidth,
+      [classes[`spacing-xs-${String(spacing)}`]]: container && spacing !== 0,
+      [classes[`direction-xs-${String(direction)}`]]: direction !== "row",
+      [classes[`wrap-xs-${String(wrap)}`]]: wrap !== "wrap",
+      [classes[`align-items-xs-${String(alignItems)}`]]:
+        alignItems !== "stretch",
+      [classes[`align-content-xs-${String(alignContent)}`]]:
+        alignContent !== "stretch",
+      [classes[`justify-xs-${String(justify)}`]]: justify !== "flex-start",
+      [classes[`grid-xs-${String(xs)}`]]: xs !== false,
+      [classes[`grid-sm-${String(sm)}`]]: sm !== false,
+      [classes[`grid-md-${String(md)}`]]: md !== false,
+      [classes[`grid-lg-${String(lg)}`]]: lg !== false,
+      [classes[`grid-xl-${String(xl)}`]]: xl !== false,
+    },
+    classNameProp
+  );
 
-    return <Component className={className} {...other} />;
-  }
+  return <Component className={className} {...other} />;
 };
 
 export default injectSheet(styles)(Grid);
