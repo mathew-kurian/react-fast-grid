@@ -5,3 +5,4 @@ tsconfig.json
 .vscode/
 .github
 .DS_Store
+examples/
