@@ -37,6 +37,9 @@ export const styles = {
     boxSizing: "border-box",
     margin: "0" // For instance, it's useful when used with a `figure` element.
   },
+  flex: {
+    display: 'flex'
+  },
   /* Styles applied to the root element if `zeroMinWidth={true}`. */
   zeroMinWidth: {
     minWidth: 0
@@ -176,6 +179,8 @@ class Grid extends React.Component<{
   style?: React.CSSProperties;
 }>{
   render() {
+    const props = this.props;
+
     const {
       classes,
       alignContent = "stretch",
@@ -195,13 +200,18 @@ class Grid extends React.Component<{
       xs = false,
       zeroMinWidth = false,
       ...other
-    } = this.props;
+    } = props;
 
     const className = clsx(
       classes.root,
       {
         [classes.container]: container,
         [classes.item]: item,
+        [classes.flex]: props.hasOwnProperty('justify') || 
+        props.hasOwnProperty('alignContent') || 
+        props.hasOwnProperty('alignItems') || 
+        props.hasOwnProperty('wrap') || 
+        props.hasOwnProperty('direction'),
         [classes.zeroMinWidth]: zeroMinWidth,
         [classes[`spacing-xs-${String(spacing)}`]]: container && spacing !== 0,
         [classes[`direction-xs-${String(direction)}`]]: direction !== "row",
@@ -215,7 +225,7 @@ class Grid extends React.Component<{
         [classes[`grid-sm-${String(sm)}`]]: sm !== false,
         [classes[`grid-md-${String(md)}`]]: md !== false,
         [classes[`grid-lg-${String(lg)}`]]: lg !== false,
-        [classes[`grid-xl-${String(xl)}`]]: xl !== false
+        [classes[`grid-xl-${String(xl)}`]]: xl !== false,
       },
       classNameProp
     );

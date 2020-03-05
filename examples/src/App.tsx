@@ -34,7 +34,7 @@ export default function App() {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={6} justify="center">
+      <Grid item xs={6} justify="center" alignItems="center" direction="column">
         <div>Name</div>
         <input />
       </Grid>
