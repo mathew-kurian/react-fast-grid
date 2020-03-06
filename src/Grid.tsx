@@ -135,7 +135,7 @@ export const styles = {
   }, {})
 };
 
-export type GridSize =
+export declare type GridSize =
   | boolean
   | "auto"
   | 1
@@ -151,42 +151,46 @@ export type GridSize =
   | 11
   | 12;
 
+  export declare type GridProps = {
+    alignContent?:
+    | "stretch"
+    | "center"
+    | "flex-start"
+    | "flex-end"
+    | "space-between"
+    | "space-around";
+    alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
+    children?: React.ReactNode;
+    className?: string;
+    component?: any;
+    spacing?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+    container?: boolean;
+    direction?: "row" | "row-reverse" | "column" | "column-reverse";
+    item?: boolean;
+    relative?: boolean;
+    maximize?: boolean;
+    classes?: any,
+    justify?:
+    | "flex-start"
+    | "center"
+    | "flex-end"
+    | "space-between"
+    | "space-around"
+    | "space-evenly";
+    lg?: GridSize;
+    md?: GridSize;
+    sm?: GridSize;
+    xl?: GridSize;
+    xs?: GridSize;
+    wrap?: "nowrap" | "wrap" | "wrap-reverse";
+    zeroMinWidth?: boolean;
+    style?: React.CSSProperties;
+  };
+
+export declare type GridClass = React.FunctionComponent<GridProps>;
+
 // TODO update to use SFC/FunctionComponent
-const Grid: React.FunctionComponent<{
-  alignContent?:
-  | "stretch"
-  | "center"
-  | "flex-start"
-  | "flex-end"
-  | "space-between"
-  | "space-around";
-  alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
-  children?: React.ReactNode;
-  className?: string;
-  component?: any;
-  spacing?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-  container?: boolean;
-  direction?: "row" | "row-reverse" | "column" | "column-reverse";
-  item?: boolean;
-  relative?: boolean;
-  maximize?: boolean;
-  classes?: any,
-  justify?:
-  | "flex-start"
-  | "center"
-  | "flex-end"
-  | "space-between"
-  | "space-around"
-  | "space-evenly";
-  lg?: GridSize;
-  md?: GridSize;
-  sm?: GridSize;
-  xl?: GridSize;
-  xs?: GridSize;
-  wrap?: "nowrap" | "wrap" | "wrap-reverse";
-  zeroMinWidth?: boolean;
-  style?: React.CSSProperties;
-}> = props => {
+const Grid: GridClass = props => {
   const {
     classes,
     alignContent = "stretch",
@@ -243,4 +247,4 @@ const Grid: React.FunctionComponent<{
   return <Component className={className} {...other} />;
 };
 
-export default injectSheet(styles)(Grid);
+export default injectSheet(styles)(Grid) as GridClass;
