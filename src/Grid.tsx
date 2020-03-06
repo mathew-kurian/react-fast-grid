@@ -32,6 +32,13 @@ export const styles = {
     flexWrap: "wrap",
     width: "100%"
   },
+  maximize: {
+    width: '100%',
+    height: '100%'
+  },
+  relative: {
+    position: 'relative',
+  },
   /* Styles applied to the root element if `item={true}`. */
   item: {
     boxSizing: "border-box",
@@ -161,6 +168,8 @@ const Grid: React.FunctionComponent<{
   container?: boolean;
   direction?: "row" | "row-reverse" | "column" | "column-reverse";
   item?: boolean;
+  relative?: boolean;
+  maximize?: boolean;
   classes?: any,
   justify?:
   | "flex-start"
@@ -196,6 +205,8 @@ const Grid: React.FunctionComponent<{
     xl = false,
     xs = false,
     zeroMinWidth = false,
+    maximize = false,
+    relative = false,
     ...other
   } = props;
 
@@ -204,6 +215,8 @@ const Grid: React.FunctionComponent<{
     {
       [classes.container]: container,
       [classes.item]: item,
+      [classes.maximize]: maximize,
+      [classes.relative]: relative,
       [classes.flex]: props.hasOwnProperty('justify') ||
         props.hasOwnProperty('alignContent') ||
         props.hasOwnProperty('alignItems') ||
