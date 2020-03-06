@@ -247,4 +247,6 @@ const Grid: GridClass = props => {
   return <Component className={className} {...other} />;
 };
 
-export default injectSheet(styles)(Grid) as GridClass;
+const WrappedGrid: GridClass = injectSheet(styles)(Grid);
+
+export default WrappedGrid;
