@@ -14,30 +14,31 @@ export function generateGrid(globalStyles: any, breakpoint: any) {
 
   GRID_SIZES.forEach(size => {
     const key = `grid-${breakpoint}-${size}`;
+    const basisKey = 'maxWidth';
 
     if (size === true) {
       // For the auto layouting
       styles[key] = {
         flexBasis: 0,
         flexGrow: 1,
-        maxWidth: "100%"
+        [basisKey]: "100%"
       };
     } else if (size === "auto") {
       styles[key] = {
         flexBasis: "auto",
         flexGrow: 0,
-        maxWidth: "none"
+        [basisKey]: "none"
       };
     } else if (typeof size === "number") {
       // Keep 7 significant numbers.
-      const width = `${Math.round((size / 12) * 10e7) / 10e5}%`;
+      const computedSize = `${Math.round((size / 12) * 10e7) / 10e5}%`;
 
       // Close to the bootstrap implementation:
       // https://github.com/twbs/bootstrap/blob/8fccaa2439e97ec72a4b7dc42ccc1f649790adb0/scss/mixins/_grid.scss#L41
       styles[key] = {
-        flexBasis: width,
+        flexBasis: computedSize,
         flexGrow: 0,
-        maxWidth: width
+        [basisKey]: computedSize
       };
     }
   });

@@ -10,12 +10,12 @@
     "react-fast-grid": "0.1.6"
   },
   "devDependencies": {
-    "@types/react": "16.9.19",
-    "@types/react-dom": "16.9.5",
+    "@types/react": ">=15",
+    "@types/react-dom": ">=15",
     "typescript": "3.7.5"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts-ts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

@@ -34,7 +34,9 @@ export const styles = {
   },
   maximize: {
     width: '100%',
-    height: '100%'
+    height: '100%',
+    maxWidth: '100% !important',
+    maxHeight: '100% !important'
   },
   relative: {
     position: 'relative',
@@ -53,11 +55,17 @@ export const styles = {
   },
   /* Styles applied to the root element if `direction="column"`. */
   "direction-xs-column": {
-    flexDirection: "column"
+    flexDirection: "column",
+    "& > $item": {
+      maxWidth: 'unset'
+    }
   },
   /* Styles applied to the root element if `direction="column-reverse"`. */
   "direction-xs-column-reverse": {
-    flexDirection: "column-reverse"
+    flexDirection: "column-reverse",
+    "& > $item": {
+      maxWidth: 'unset'
+    }
   },
   /* Styles applied to the root element if `direction="rwo-reverse"`. */
   "direction-xs-row-reverse": {
@@ -214,6 +222,12 @@ const Grid: GridClass = props => {
     ...other
   } = props;
 
+  // if (xs > 0 | ['column', 'column-reverse'].indexOf(direction)) {
+
+  // }
+
+  const gridDirection = direction.charAt(0);
+
   const className = clsx(
     classes.root,
     {
@@ -243,7 +257,7 @@ const Grid: GridClass = props => {
     },
     classNameProp
   );
-
+  
   return <Component className={className} {...other} />;
 };
 
