@@ -194,10 +194,10 @@ export declare type GridProps = {
   style?: React.CSSProperties;
 };
 
-export declare type GridClass = React.SFC<GridProps>;
+export declare type Grid = (props: GridProps) => React.ReactElement<Grid>;
 
 // TODO update to use SFC/FunctionComponent
-const Grid: GridClass = props => {
+const Grid: Grid = (props: GridProps) => {
   const {
     classes,
     alignContent = "stretch",
@@ -255,6 +255,6 @@ const Grid: GridClass = props => {
   return <Component className={className} {...other} />;
 };
 
-const WrappedGrid: GridClass = injectSheet(styles)(Grid);
+const StyledGrid: Grid = injectSheet(styles)(Grid);
 
-export default WrappedGrid;
+export default StyledGrid;
