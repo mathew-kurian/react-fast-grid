@@ -142,8 +142,6 @@ export const styles = {
   }, {})
 };
 
-console.log(styles);
-
 export declare type GridSize =
   | boolean
   | "auto"
@@ -222,12 +220,6 @@ const Grid: GridClass = props => {
     relative = false,
     ...other
   } = props;
-
-  // if (xs > 0 | ['column', 'column-reverse'].indexOf(direction)) {
-
-  // }
-
-  const gridDirection = direction.charAt(0);
 
   const className = clsx(
     classes.root,
