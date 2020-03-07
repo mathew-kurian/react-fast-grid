@@ -9,25 +9,25 @@ const GRID_SIZES = ["auto", true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 export { breakpoints };
 
-export function generateGrid(globalStyles: any, breakpoint: any) {
+export function generateGrid(globalStyles: any, breakpoint: any, baseStyles: any) {
   const styles: any = {};
+  const COLUMN_CLASS = "direction-xs-column";
 
   GRID_SIZES.forEach(size => {
     const key = `grid-${breakpoint}-${size}`;
-    const basisKey = 'maxWidth';
 
     if (size === true) {
       // For the auto layouting
       styles[key] = {
         flexBasis: 0,
         flexGrow: 1,
-        [basisKey]: "100%"
+        maxWidth: "100%"
       };
     } else if (size === "auto") {
       styles[key] = {
         flexBasis: "auto",
         flexGrow: 0,
-        [basisKey]: "none"
+        maxWidth: "none"
       };
     } else if (typeof size === "number") {
       // Keep 7 significant numbers.
@@ -38,14 +38,24 @@ export function generateGrid(globalStyles: any, breakpoint: any) {
       styles[key] = {
         flexBasis: computedSize,
         flexGrow: 0,
-        [basisKey]: computedSize
+        maxWidth: computedSize
       };
     }
+
+    styles[COLUMN_CLASS] = {
+      ...styles[COLUMN_CLASS],
+      ["& > $" + key]: {
+        ...styles[key],
+        maxWidth: 'unset',
+        maxHeight: styles[key].maxWidth
+      }
+    };
   });
+
 
   // No need for a media query for the first size.
   if (breakpoint === "xs") {
-    Object.assign(globalStyles, styles);
+    Object.assign(globalStyles, { ...styles, [COLUMN_CLASS]: { ...baseStyles[COLUMN_CLASS], ...styles[COLUMN_CLASS] } });
   } else {
     globalStyles[breakpoints.up(breakpoint)] = styles;
   }

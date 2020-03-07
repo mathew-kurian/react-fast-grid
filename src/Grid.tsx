@@ -16,13 +16,8 @@ import { Breakpoint } from './createBreakPoints';
 // @ts-ignore
 import injectSheet from 'react-jss'
 
-// Default CSS values
-// flex: '0 1 auto',
-// flexDirection: 'row',
-// alignItems: 'flex-start',
-// flexWrap: 'nowrap',
-// justifyContent: 'flex-start',
-export const styles = {
+const baseStyles = {
+
   /* Styles applied to the root element */
   root: {},
   /* Styles applied to the root element if `container={true}`. */
@@ -53,19 +48,13 @@ export const styles = {
   zeroMinWidth: {
     minWidth: 0
   },
-  /* Styles applied to the root element if `direction="column"`. */
+  /* Styles applied to the root element if `direction="column"` or `direction="column-reverse"`. */
   "direction-xs-column": {
-    flexDirection: "column",
-    "& > $item": {
-      maxWidth: 'unset'
-    }
+    flexDirection: "column"
   },
   /* Styles applied to the root element if `direction="column-reverse"`. */
   "direction-xs-column-reverse": {
-    flexDirection: "column-reverse",
-    "& > $item": {
-      maxWidth: 'unset'
-    }
+    flexDirection: "column-reverse"
   },
   /* Styles applied to the root element if `direction="rwo-reverse"`. */
   "direction-xs-row-reverse": {
@@ -135,13 +124,25 @@ export const styles = {
   "justify-xs-space-evenly": {
     justifyContent: "space-evenly"
   },
+};
+
+// Default CSS values
+// flex: '0 1 auto',
+// flexDirection: 'row',
+// alignItems: 'flex-start',
+// flexWrap: 'nowrap',
+// justifyContent: 'flex-start',
+export const styles = {
+  ...baseStyles,
   ...generateGutter("xs"),
   ...breakpoints.keys.reduce((accumulator: object, key: (Breakpoint | number)) => {
     // Use side effect over immutability for better performance.
-    generateGrid(accumulator, key);
+    generateGrid(accumulator, key, baseStyles);
     return accumulator;
   }, {})
 };
+
+console.log(styles);
 
 export declare type GridSize =
   | boolean
@@ -242,6 +243,7 @@ const Grid: GridClass = props => {
         props.hasOwnProperty('direction'),
       [classes.zeroMinWidth]: zeroMinWidth,
       [classes[`spacing-xs-${String(spacing)}`]]: container && spacing !== 0,
+      [classes[`direction-xs-column`]]: direction === 'column' || direction === 'column-reverse',
       [classes[`direction-xs-${String(direction)}`]]: direction !== "row",
       [classes[`wrap-xs-${String(wrap)}`]]: wrap !== "wrap",
       [classes[`align-items-xs-${String(alignItems)}`]]:
