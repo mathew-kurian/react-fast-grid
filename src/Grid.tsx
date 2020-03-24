@@ -276,15 +276,17 @@ const Grid: Grid = (props: GridProps) => {
   );
 
   if (process.env.NODE_ENV !== "production") {
+    const pkg = require("../package.json");
+
     if (container && item && spacing > 0) {
       console.warn(
-        `[Grid] Grid component has container=true and item=true i.e. <Grid item container>. Expect spacing issues.`
+        `[${pkg.name}] Grid component has container=true and item=true i.e. <Grid item container>. Expect spacing issues.`
       );
     }
 
     if (!container && item && spacing > 0) {
       console.warn(
-        `[Grid] Grid component has spacing=${spacing} and item=true but does not have container=true. Is this expected?`
+        `[${pkg.name}] Grid component has spacing=${spacing} and item=true but does not have container=true. Is this expected?`
       );
     }
 
@@ -299,7 +301,7 @@ const Grid: Grid = (props: GridProps) => {
         other.style.marginRight)
     ) {
       console.warn(
-        `[Grid] Grid component has spacing=${spacing} but has style.margin defined. Please remove margins on this component.`
+        `[${pkg.name}] Grid component has spacing=${spacing} but has style.margin defined. Please remove margins on this component.`
       );
     }
 
@@ -310,7 +312,8 @@ const Grid: Grid = (props: GridProps) => {
         } else if (isGridComponent(child)) {
           if (!child.props.item) {
             console.warn(
-              `[Grid] Immediate children of <Grid container> should be marked as "item=true" i.e. <Grid item>`
+              `[${pkg.name}] Immediate children of <Grid container> should be marked as "item=true" i.e. <Grid item>`,
+              child
             );
           } else if (
             spacing > 0 &&
@@ -322,7 +325,8 @@ const Grid: Grid = (props: GridProps) => {
               child.props.style.paddingRight)
           ) {
             console.warn(
-              `[Grid] Grid component's parent has spacing=${spacing} but has style.padding defined. Please remove padding on this component.`
+              `[${pkg.name}] Grid component's parent has spacing=${spacing} but child has style.padding defined. Please remove padding on this component.`,
+              child
             );
           }
         } else if (isReactElement(child)) {
@@ -330,13 +334,15 @@ const Grid: Grid = (props: GridProps) => {
           const displayName = child.type.displayName || child.type;
 
           console.warn(
-            `[Grid] Immediate children of <Grid container> should be a <Grid> but instead found <${displayName}>`
+            `[${pkg.name}] Immediate children of <Grid container> should be a <Grid> but instead found <${displayName}>`,
+            child
           );
         } else {
           const displayName = child;
 
           console.warn(
-            `[Grid] Immediate children of <Grid container> should be a <Grid> but instead found ${displayName}`
+            `[${pkg.name}] Immediate children of <Grid container> should be a <Grid> but instead found ${displayName}`,
+            child
           );
         }
       }
