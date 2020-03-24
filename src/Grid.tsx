@@ -12,12 +12,11 @@
 import * as React from "react";
 import clsx from "clsx";
 import { breakpoints, generateGutter, generateGrid } from "./gridHelpers";
-import { Breakpoint } from './createBreakPoints';
+import { Breakpoint } from "./createBreakPoints";
 // @ts-ignore
-import injectSheet from 'react-jss'
+import injectSheet from "react-jss";
 
 const baseStyles = {
-
   /* Styles applied to the root element */
   root: {},
   /* Styles applied to the root element if `container={true}`. */
@@ -28,13 +27,13 @@ const baseStyles = {
     width: "100%"
   },
   maximize: {
-    width: '100%',
-    height: '100%',
-    maxWidth: '100% !important',
-    maxHeight: '100% !important'
+    width: "100%",
+    height: "100%",
+    maxWidth: "100% !important",
+    maxHeight: "100% !important"
   },
   relative: {
-    position: 'relative',
+    position: "relative"
   },
   /* Styles applied to the root element if `item={true}`. */
   item: {
@@ -42,7 +41,7 @@ const baseStyles = {
     margin: "0" // For instance, it's useful when used with a `figure` element.
   },
   flex: {
-    display: 'flex'
+    display: "flex"
   },
   /* Styles applied to the root element if `zeroMinWidth={true}`. */
   zeroMinWidth: {
@@ -123,7 +122,7 @@ const baseStyles = {
   /* Styles applied to the root element if `justify="space-evenly"`. */
   "justify-xs-space-evenly": {
     justifyContent: "space-evenly"
-  },
+  }
 };
 
 // Default CSS values
@@ -135,11 +134,14 @@ const baseStyles = {
 export const styles = {
   ...baseStyles,
   ...generateGutter("xs"),
-  ...breakpoints.keys.reduce((accumulator: object, key: (Breakpoint | number)) => {
-    // Use side effect over immutability for better performance.
-    generateGrid(accumulator, key, baseStyles);
-    return accumulator;
-  }, {})
+  ...breakpoints.keys.reduce(
+    (accumulator: object, key: Breakpoint | number) => {
+      // Use side effect over immutability for better performance.
+      generateGrid(accumulator, key, baseStyles);
+      return accumulator;
+    },
+    {}
+  )
 };
 
 export declare type GridSize =
@@ -160,12 +162,12 @@ export declare type GridSize =
 
 export declare type GridProps = {
   alignContent?:
-  | "stretch"
-  | "center"
-  | "flex-start"
-  | "flex-end"
-  | "space-between"
-  | "space-around";
+    | "stretch"
+    | "center"
+    | "flex-start"
+    | "flex-end"
+    | "space-between"
+    | "space-around";
   alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
   children?: React.ReactNode;
   className?: string;
@@ -176,14 +178,14 @@ export declare type GridProps = {
   item?: boolean;
   relative?: boolean;
   maximize?: boolean;
-  classes?: any,
+  classes?: any;
   justify?:
-  | "flex-start"
-  | "center"
-  | "flex-end"
-  | "space-between"
-  | "space-around"
-  | "space-evenly";
+    | "flex-start"
+    | "center"
+    | "flex-end"
+    | "space-between"
+    | "space-around"
+    | "space-evenly";
   lg?: GridSize;
   md?: GridSize;
   sm?: GridSize;
@@ -195,6 +197,24 @@ export declare type GridProps = {
 };
 
 export declare type Grid = (props: GridProps) => React.ReactElement<Grid>;
+
+const isGridComponent = (
+  element: any
+): element is React.ReactElement<GridProps> => {
+  return (
+    element.type &&
+    element.type.InnerComponent &&
+    element.type.InnerComponent === Grid
+  );
+};
+
+const isNull = (element: any): element is null => {
+  return element == null;
+};
+
+const isReactElement = (element: any): element is React.ReactElement => {
+  return !!element.type;
+};
 
 // TODO update to use SFC/FunctionComponent
 const Grid: Grid = (props: GridProps) => {
@@ -218,6 +238,7 @@ const Grid: Grid = (props: GridProps) => {
     zeroMinWidth = false,
     maximize = false,
     relative = false,
+    children = null,
     ...other
   } = props;
 
@@ -228,14 +249,16 @@ const Grid: Grid = (props: GridProps) => {
       [classes.item]: item,
       [classes.maximize]: maximize,
       [classes.relative]: relative,
-      [classes.flex]: props.hasOwnProperty('justify') ||
-        props.hasOwnProperty('alignContent') ||
-        props.hasOwnProperty('alignItems') ||
-        props.hasOwnProperty('wrap') ||
-        props.hasOwnProperty('direction'),
+      [classes.flex]:
+        props.hasOwnProperty("justify") ||
+        props.hasOwnProperty("alignContent") ||
+        props.hasOwnProperty("alignItems") ||
+        props.hasOwnProperty("wrap") ||
+        props.hasOwnProperty("direction"),
       [classes.zeroMinWidth]: zeroMinWidth,
       [classes[`spacing-xs-${String(spacing)}`]]: container && spacing !== 0,
-      [classes[`direction-xs-column`]]: direction === 'column' || direction === 'column-reverse',
+      [classes[`direction-xs-column`]]:
+        direction === "column" || direction === "column-reverse",
       [classes[`direction-xs-${String(direction)}`]]: direction !== "row",
       [classes[`wrap-xs-${String(wrap)}`]]: wrap !== "wrap",
       [classes[`align-items-xs-${String(alignItems)}`]]:
@@ -247,12 +270,84 @@ const Grid: Grid = (props: GridProps) => {
       [classes[`grid-sm-${String(sm)}`]]: sm !== false,
       [classes[`grid-md-${String(md)}`]]: md !== false,
       [classes[`grid-lg-${String(lg)}`]]: lg !== false,
-      [classes[`grid-xl-${String(xl)}`]]: xl !== false,
+      [classes[`grid-xl-${String(xl)}`]]: xl !== false
     },
     classNameProp
   );
-  
-  return <Component className={className} {...other} />;
+
+  if (process.env.NODE_ENV !== "production") {
+    if (container && item && spacing > 0) {
+      console.warn(
+        `[Grid] Grid component has container=true and item=true i.e. <Grid item container>. Expect spacing issues.`
+      );
+    }
+
+    if (!container && item && spacing > 0) {
+      console.warn(
+        `[Grid] Grid component has spacing=${spacing} and item=true but does not have container=true. Is this expected?`
+      );
+    }
+
+    if (
+      container &&
+      spacing > 0 &&
+      other.style &&
+      (other.style.margin ||
+        other.style.marginLeft ||
+        other.style.marginRight ||
+        other.style.marginBottom ||
+        other.style.marginRight)
+    ) {
+      console.warn(
+        `[Grid] Grid component has spacing=${spacing} but has style.margin defined. Please remove margins on this component.`
+      );
+    }
+
+    if (container) {
+      for (const child of React.Children.toArray(children)) {
+        if (isNull(child)) {
+          continue;
+        } else if (isGridComponent(child)) {
+          if (!child.props.item) {
+            console.warn(
+              `[Grid] Immediate children of <Grid container> should be marked as "item=true" i.e. <Grid item>`
+            );
+          } else if (
+            spacing > 0 &&
+            child.props.style &&
+            (child.props.style.padding ||
+              child.props.style.paddingLeft ||
+              child.props.style.paddingRight ||
+              child.props.style.paddingBottom ||
+              child.props.style.paddingRight)
+          ) {
+            console.warn(
+              `[Grid] Grid component's parent has spacing=${spacing} but has style.padding defined. Please remove padding on this component.`
+            );
+          }
+        } else if (isReactElement(child)) {
+          // @ts-ignore
+          const displayName = child.type.displayName || child.type;
+
+          console.warn(
+            `[Grid] Immediate children of <Grid container> should be a <Grid> but instead found <${displayName}>`
+          );
+        } else {
+          const displayName = child;
+
+          console.warn(
+            `[Grid] Immediate children of <Grid container> should be a <Grid> but instead found ${displayName}`
+          );
+        }
+      }
+    }
+  }
+
+  return (
+    <Component className={className} {...other}>
+      {children}
+    </Component>
+  );
 };
 
 const StyledGrid: Grid = injectSheet(styles)(Grid);

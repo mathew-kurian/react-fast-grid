@@ -1,6 +1,6 @@
 {
   "name": "react-fast-grid",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "main": "./lib/Grid.js",
   "typings": "./lib/Grid.d.ts",
   "scripts": {
@@ -36,6 +36,7 @@
     "react-dom": ">=15"
   },
   "devDependencies": {
+    "@types/node": "^13.9.3",
     "@types/react": ">=15",
     "@types/react-dom": ">=15",
     "typescript": "3.7.5"

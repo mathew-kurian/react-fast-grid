@@ -4,7 +4,7 @@ import { Example1, Example2, Example3, Example4 } from "./components/Examples";
 
 export default function App() {
   return (
-    <Grid container spacing={4} style={{padding: 20}} direction="column">
+    <Grid container spacing={4} style={{ padding: 20 }} direction="column">
       <Grid item>
         <Example1 />
       </Grid>
@@ -17,6 +17,8 @@ export default function App() {
       <Grid item>
         <Example4 />
       </Grid>
+      6
+      <div />
     </Grid>
   );
 }
