@@ -1,6 +1,6 @@
 {
   "name": "react-fast-grid",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "main": "./lib/Grid.js",
   "typings": "./lib/Grid.d.ts",
   "scripts": {
@@ -28,17 +28,17 @@
   "homepage": "https://github.com/mathew-kurian/react-fast-grid#readme",
   "description": "Useful Grid algorithm from Material-UI (https://github.com/mui-org/material-ui)",
   "dependencies": {
-    "clsx": "1.1.0",
-    "react-jss": "^8.6.1"
+    "clsx": "1.1.0"
   },
   "peerDependencies": {
     "react": ">=15",
-    "react-dom": ">=15"
+    "react-dom": ">=15",
+    "react-jss": ">=8.6.1"
   },
   "devDependencies": {
     "@types/node": "^13.9.3",
     "@types/react": ">=15",
     "@types/react-dom": ">=15",
-    "typescript": "3.7.5"
+    "typescript": "^3.7.5"
   }
 }
