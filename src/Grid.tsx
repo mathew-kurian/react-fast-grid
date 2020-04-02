@@ -23,8 +23,13 @@ const baseStyles = {
   container: {
     boxSizing: "border-box",
     display: "flex",
-    flexWrap: "wrap",
+    flexWrap: "wrap"
+  },
+  containerRow: {
     width: "100%"
+  },
+  containerColumn: {
+    height: "100%"
   },
   maximize: {
     width: "100%",
@@ -246,6 +251,10 @@ const Grid: Grid = (props: GridProps) => {
     classes.root,
     {
       [classes.container]: container,
+      [classes.containerRow]:
+        container && (direction === "row" || direction === "row-reverse"),
+      [classes.containerColumn]:
+        container && (direction === "column" || direction === "column-reverse"),
       [classes.item]: item,
       [classes.maximize]: maximize,
       [classes.relative]: relative,
