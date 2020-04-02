@@ -7,9 +7,9 @@
   "dependencies": {
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-fast-grid": "latest",
     "react-icons": "^3.9.0",
-    "react-jss": "^10.1.1"
+    "react-jss": "^10.1.1",
+    "react-fast-grid": "2.0.1"
   },
   "devDependencies": {
     "react-scripts-ts": "3.1.0",

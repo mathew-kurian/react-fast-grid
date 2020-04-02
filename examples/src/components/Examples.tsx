@@ -6,8 +6,8 @@ const styles = {
   outer: {
     borderRadius: 5,
     boxShadow: "0 10px 30px #BBB",
-    padding: 10,
-  },
+    padding: 10
+  }
 };
 
 export const Example1 = () => (
@@ -94,15 +94,31 @@ export const Example3 = () => (
 
 export const Example4 = () => (
   <Grid container justify="center" alignContent="center">
-    <Grid item direction="column"
-      container style={{ ...styles.outer, width: 400, height: 400 }} justify="space-between">
-      <Grid item xs>Header</Grid>
+    <Grid
+      item
+      direction="column"
+      container
+      style={{ ...styles.outer, width: 400, height: 400 }}
+      justify="space-between"
+    >
+      <Grid item xs>
+        Header
+      </Grid>
       <Grid item xs={10} style={{ overflowY: "scroll" }}>
         <Grid container direction="row">
-          {Array(50).fill(0).map((_, i) => <Grid key={i} item xs={12}><div>Last Name</div><input /></Grid>)}
+          {Array(50)
+            .fill(0)
+            .map((_, i) => (
+              <Grid key={i} item xs={12}>
+                <div>Last Name</div>
+                <input />
+              </Grid>
+            ))}
         </Grid>
       </Grid>
-      <Grid item xs>Footer</Grid>
+      <Grid item xs>
+        Footer
+      </Grid>
     </Grid>
   </Grid>
 );

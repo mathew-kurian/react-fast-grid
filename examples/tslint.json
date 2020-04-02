@@ -1,7 +1,5 @@
 {
-  "extends": [
-    "tslint:recommended"   
-  ],
+  "extends": [],
   "jsRules": {},
   "rules": {},
   "rulesDirectory": []
