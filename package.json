@@ -1,6 +1,6 @@
 {
   "name": "react-fast-grid",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "./lib/Grid.js",
   "typings": "./lib/Grid.d.ts",
   "scripts": {

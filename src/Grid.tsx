@@ -221,6 +221,8 @@ const isReactElement = (element: any): element is React.ReactElement => {
   return !!element.type;
 };
 
+export const debugStyles = {};
+
 // TODO update to use SFC/FunctionComponent
 const Grid: Grid = (props: GridProps) => {
   const {
@@ -356,6 +358,16 @@ const Grid: Grid = (props: GridProps) => {
         }
       }
     }
+  }
+
+  if (process.env.NODE_ENV !== "production") {
+    const style = { ...other.style, ...debugStyles };
+
+    return (
+      <Component className={className} {...other} style={style}>
+        {children}
+      </Component>
+    );
   }
 
   return (
