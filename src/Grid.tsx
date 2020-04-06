@@ -23,111 +23,111 @@ const baseStyles = {
   container: {
     boxSizing: "border-box",
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   containerRow: {
-    width: "100%"
+    width: "100%",
   },
   containerColumn: {
-    height: "100%"
+    height: "100%",
   },
   maximize: {
     width: "100%",
     height: "100%",
     maxWidth: "100% !important",
-    maxHeight: "100% !important"
+    maxHeight: "100% !important",
   },
   relative: {
-    position: "relative"
+    position: "relative",
   },
   /* Styles applied to the root element if `item={true}`. */
   item: {
     boxSizing: "border-box",
-    margin: "0" // For instance, it's useful when used with a `figure` element.
+    margin: "0", // For instance, it's useful when used with a `figure` element.
   },
   flex: {
-    display: "flex"
+    display: "flex",
   },
   /* Styles applied to the root element if `zeroMinWidth={true}`. */
   zeroMinWidth: {
-    minWidth: 0
+    minWidth: 0,
   },
   /* Styles applied to the root element if `direction="column"` or `direction="column-reverse"`. */
   "direction-xs-column": {
-    flexDirection: "column"
+    flexDirection: "column",
   },
   /* Styles applied to the root element if `direction="column-reverse"`. */
   "direction-xs-column-reverse": {
-    flexDirection: "column-reverse"
+    flexDirection: "column-reverse",
   },
   /* Styles applied to the root element if `direction="rwo-reverse"`. */
   "direction-xs-row-reverse": {
-    flexDirection: "row-reverse"
+    flexDirection: "row-reverse",
   },
   /* Styles applied to the root element if `wrap="nowrap"`. */
   "wrap-xs-nowrap": {
-    flexWrap: "nowrap"
+    flexWrap: "nowrap",
   },
   /* Styles applied to the root element if `wrap="reverse"`. */
   "wrap-xs-wrap-reverse": {
-    flexWrap: "wrap-reverse"
+    flexWrap: "wrap-reverse",
   },
   /* Styles applied to the root element if `alignItems="center"`. */
   "align-items-xs-center": {
-    alignItems: "center"
+    alignItems: "center",
   },
   /* Styles applied to the root element if `alignItems="flex-start"`. */
   "align-items-xs-flex-start": {
-    alignItems: "flex-start"
+    alignItems: "flex-start",
   },
   /* Styles applied to the root element if `alignItems="flex-end"`. */
   "align-items-xs-flex-end": {
-    alignItems: "flex-end"
+    alignItems: "flex-end",
   },
   /* Styles applied to the root element if `alignItems="baseline"`. */
   "align-items-xs-baseline": {
-    alignItems: "baseline"
+    alignItems: "baseline",
   },
   /* Styles applied to the root element if `alignContent="center"`. */
   "align-content-xs-center": {
-    alignContent: "center"
+    alignContent: "center",
   },
   /* Styles applied to the root element if `alignContent="flex-start"`. */
   "align-content-xs-flex-start": {
-    alignContent: "flex-start"
+    alignContent: "flex-start",
   },
   /* Styles applied to the root element if `alignContent="flex-end"`. */
   "align-content-xs-flex-end": {
-    alignContent: "flex-end"
+    alignContent: "flex-end",
   },
   /* Styles applied to the root element if `alignContent="space-between"`. */
   "align-content-xs-space-between": {
-    alignContent: "space-between"
+    alignContent: "space-between",
   },
   /* Styles applied to the root element if `alignContent="space-around"`. */
   "align-content-xs-space-around": {
-    alignContent: "space-around"
+    alignContent: "space-around",
   },
   /* Styles applied to the root element if `justify="center"`. */
   "justify-xs-center": {
-    justifyContent: "center"
+    justifyContent: "center",
   },
   /* Styles applied to the root element if `justify="flex-end"`. */
   "justify-xs-flex-end": {
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
   },
   /* Styles applied to the root element if `justify="space-between"`. */
   "justify-xs-space-between": {
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   /* Styles applied to the root element if `justify="space-around"`. */
   "justify-xs-space-around": {
-    justifyContent: "space-around"
+    justifyContent: "space-around",
   },
   /* Styles applied to the root element if `justify="space-evenly"`. */
   "justify-xs-space-evenly": {
-    justifyContent: "space-evenly"
-  }
+    justifyContent: "space-evenly",
+  },
 };
 
 // Default CSS values
@@ -146,7 +146,7 @@ export const styles = {
       return accumulator;
     },
     {}
-  )
+  ),
 };
 
 export declare type GridSize =
@@ -199,6 +199,7 @@ export declare type GridProps = {
   wrap?: "nowrap" | "wrap" | "wrap-reverse";
   zeroMinWidth?: boolean;
   style?: React.CSSProperties;
+  ref?: React.Ref<any> | ((ref: React.ReactInstance | HTMLElement) => void);
 };
 
 export declare type Grid = (props: GridProps) => React.ReactElement<Grid>;
@@ -246,6 +247,7 @@ const Grid: Grid = (props: GridProps) => {
     maximize = false,
     relative = false,
     children = null,
+    ref = null,
     ...other
   } = props;
 
@@ -281,7 +283,7 @@ const Grid: Grid = (props: GridProps) => {
       [classes[`grid-sm-${String(sm)}`]]: sm !== false,
       [classes[`grid-md-${String(md)}`]]: md !== false,
       [classes[`grid-lg-${String(lg)}`]]: lg !== false,
-      [classes[`grid-xl-${String(xl)}`]]: xl !== false
+      [classes[`grid-xl-${String(xl)}`]]: xl !== false,
     },
     classNameProp
   );
@@ -364,14 +366,14 @@ const Grid: Grid = (props: GridProps) => {
     const style = { ...other.style, ...debugStyles };
 
     return (
-      <Component className={className} {...other} style={style}>
+      <Component className={className} ref={ref} {...other} style={style}>
         {children}
       </Component>
     );
   }
 
   return (
-    <Component className={className} {...other}>
+    <Component className={className} ref={ref} {...other}>
       {children}
     </Component>
   );
