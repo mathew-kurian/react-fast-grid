@@ -5,11 +5,7 @@
 Useful algorithm extracted from [Material-UI Grid](https://material-ui.com/components/grid/#grid)
 
 ```
-# React < 16
 npm install react-fast-grid react-jss@^8.6.1 --save
-
-# React 16+
-npm install react-fast-grid react-jss --save
 ```
 
 ## Known Issues
