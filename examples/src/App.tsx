@@ -1,10 +1,56 @@
 import * as React from "react";
-import Grid from "react-fast-grid";
+import Grid, { Hidden } from "react-fast-grid";
 import { Example1, Example2, Example3, Example4 } from "./components/Examples";
 
 export default function App() {
   return (
     <Grid container spacing={4} style={{ padding: 20 }} direction="column">
+      <Hidden only="xs" debounce={300}>
+        <Grid item>Test 1: xs</Grid>
+      </Hidden>
+      <Hidden only="sm" debounce={300}>
+        <Grid item>Test 1: sm</Grid>
+      </Hidden>
+      <Hidden only="md" debounce={300}>
+        <Grid item>Test 1: md</Grid>
+      </Hidden>
+      <Hidden only="lg" debounce={300}>
+        <Grid item>Test 1: lg</Grid>
+      </Hidden>
+      <Hidden only="xl" debounce={300}>
+        <Grid item>Test 1: xl</Grid>
+      </Hidden>
+      <Hidden xsUp debounce={300}>
+        <Grid item>Test 2: xs,sm,md,lg,xl</Grid>
+      </Hidden>
+      <Hidden smUp debounce={300}>
+        <Grid item>Test 2: sm,md,lg,xl</Grid>
+      </Hidden>
+      <Hidden mdUp debounce={300}>
+        <Grid item>Test 2: md,lg,xl</Grid>
+      </Hidden>
+      <Hidden lgUp debounce={300}>
+        <Grid item>Test 2: lg,xl</Grid>
+      </Hidden>
+      <Hidden xlUp debounce={300}>
+        <Grid item>Test 2: xl</Grid>
+      </Hidden>
+      <Hidden xsDown debounce={300}>
+        <Grid item>Test 3: xs</Grid>
+      </Hidden>
+      <Hidden smDown debounce={300}>
+        <Grid item>Test 3: xs,sm</Grid>
+      </Hidden>
+      <Hidden mdDown debounce={300}>
+        <Grid item>Test 3: xs,sm,md</Grid>
+      </Hidden>
+      <Hidden lgDown debounce={300}>
+        <Grid item>Test 3: xs,sm,md,lg</Grid>
+      </Hidden>
+      <Hidden xlDown debounce={300}>
+        <Grid item>Test 3: xs,sm,md,lg,xl</Grid>
+      </Hidden>
+      <div />
       <Grid item>
         <Example1 />
       </Grid>
@@ -18,7 +64,6 @@ export default function App() {
         <Example4 />
       </Grid>
       6
-      <div />
     </Grid>
   );
 }

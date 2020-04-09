@@ -1,11 +1,12 @@
 {
   "name": "react-fast-grid",
-  "version": "2.0.5",
+  "version": "2.0.7",
   "main": "./lib/Grid.js",
   "typings": "./lib/Grid.d.ts",
   "scripts": {
     "prepare": "npm run build",
-    "build": "npx tsc"
+    "build": "npx tsc",
+    "watch": "npx tsc-watch"
   },
   "files": [
     "lib"

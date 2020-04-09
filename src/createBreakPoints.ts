@@ -1,50 +1,47 @@
-export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-export type BreakpointValues = { [key in Breakpoint | number]: number };
+export type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl";
+export type BreakpointValues = { [key in Breakpoint]: number };
+
+type Callback = () => void;
 
 export interface Breakpoints {
-  keys: (Breakpoint | number)[];
+  keys: Breakpoint[];
   values: BreakpointValues;
-  up: (key: Breakpoint | number) => string;
-  down: (key: Breakpoint | number) => string;
-  between: (start: Breakpoint | number, end: Breakpoint | number) => string;
+  up: (key: Breakpoint) => string;
+  down: (key: Breakpoint) => string;
+  between: (start: Breakpoint, end: Breakpoint) => string;
   only: (key: Breakpoint) => string;
   width: (key: Breakpoint) => number;
 }
 
-export type BreakpointsOptions = Partial<
-  {
-    unit: string;
-    step: number;
-  } & Breakpoints
->;
+export type BreakpointsOptions = {
+  unit: string;
+  step: number;
+  values: BreakpointValues;
+};
 
 // Sorted ASC by size. That's important.
 // It can't be configured as it's used statically for propTypes.
-export const keys: (Breakpoint | number)[] = ["xs", "sm", "md", "lg", "xl"];
+export const keys: Breakpoint[] = ["xs", "sm", "md", "lg", "xl"];
 
 // Keep in mind that @media is inclusive by the CSS specification.
-export default function createBreakpoints(breakpoints: BreakpointsOptions): Breakpoints {
+export default function createBreakpoints(
+  breakpoints: BreakpointsOptions
+): Breakpoints {
   const {
     // The breakpoint **start** at this value.
     // For instance with the first breakpoint xs: [xs, sm[.
-    values = {
-      xs: 0,
-      sm: 600,
-      md: 960,
-      lg: 1280,
-      xl: 1920
-    },
-    unit = "px",
-    step = 5,
+    values,
+    unit,
+    step,
     ...other
   } = breakpoints;
 
-  function up(key: Breakpoint | number) : string {
+  function up(key: Breakpoint): string {
     const value = typeof values[key] === "number" ? values[key] : key;
     return `@media (min-width:${value}${unit})`;
   }
 
-  function down(key: Breakpoint | number) : string {
+  function down(key: Breakpoint): string {
     const endIndex = keys.indexOf(key) + 1;
     const upperbound = values[keys[endIndex]];
 
@@ -59,7 +56,7 @@ export default function createBreakpoints(breakpoints: BreakpointsOptions): Brea
     return `@media (max-width:${value - step / 100}${unit})`;
   }
 
-  function between(start: Breakpoint | number, end: Breakpoint | number) : string {
+  function between(start: Breakpoint, end: Breakpoint): string {
     const endIndex = keys.indexOf(end);
 
     if (endIndex === keys.length - 1) {
@@ -68,22 +65,23 @@ export default function createBreakpoints(breakpoints: BreakpointsOptions): Brea
 
     return (
       `@media (min-width:${
-      typeof values[start] === "number" ? values[start] : start
+        typeof values[start] === "number" ? values[start] : start
       }${unit}) and ` +
-       // @ts-ignore
-      `(max-width:${(endIndex !== -1 &&
-        typeof values[keys[endIndex + 1]] === "number"
-        ? values[keys[endIndex + 1]]
-        : end) -
-      step / 100}${unit})`
+      `(max-width:${
+        // @ts-ignore
+        (endIndex !== -1 && typeof values[keys[endIndex + 1]] === "number"
+          ? values[keys[endIndex + 1]]
+          : end) -
+        step / 100
+      }${unit})`
     );
   }
 
-  function only(key : Breakpoint) : string {
+  function only(key: Breakpoint): string {
     return between(key, key);
   }
 
-  function width(key : Breakpoint) : number {
+  function width(key: Breakpoint): number {
     return values[key];
   }
 
@@ -95,6 +93,6 @@ export default function createBreakpoints(breakpoints: BreakpointsOptions): Brea
     between,
     only,
     width,
-    ...other
+    ...other,
   };
 }

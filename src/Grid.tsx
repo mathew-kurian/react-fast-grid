@@ -15,6 +15,7 @@ import { breakpoints, generateGutter, generateGrid } from "./gridHelpers";
 import { Breakpoint } from "./createBreakPoints";
 // @ts-ignore
 import injectSheet from "react-jss";
+import Hidden, { isHiddenComponent } from "./Hidden";
 
 const baseStyles = {
   /* Styles applied to the root element */
@@ -320,7 +321,7 @@ const Grid: Grid = (props: GridProps) => {
 
     if (container) {
       for (const child of React.Children.toArray(children)) {
-        if (isNull(child)) {
+        if (isNull(child) || isHiddenComponent(child)) {
           continue;
         } else if (isGridComponent(child)) {
           if (!child.props.item) {
@@ -380,5 +381,7 @@ const Grid: Grid = (props: GridProps) => {
 };
 
 const StyledGrid: Grid = injectSheet(styles)(Grid);
+
+export { Hidden };
 
 export default StyledGrid;

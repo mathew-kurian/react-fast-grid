@@ -1,8 +1,8 @@
-# React Fast Grid
+# React Fast Grid (+ Hidden)
 
 [![Edit React Fast Grid](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/grid-layout-wrc4q?fontsize=14&hidenavigation=1&theme=dark)
 
-Useful algorithm extracted from [Material-UI Grid](https://material-ui.com/components/grid/#grid)
+Useful algorithm extracted from [Material-UI Grid](https://material-ui.com/components/grid/#grid) and [Material-UI Hidden](ttps://material-ui.com/components/hidden/)
 
 ```
 npm install react-fast-grid react-jss@^8.6.1 --save
