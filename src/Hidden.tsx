@@ -54,7 +54,7 @@ export interface HiddenProps {
   xlDown?: boolean;
   only?: Breakpoint | Breakpoint[];
   debounce?: number;
-  children?: React.ReactNode;
+  children?: any;
 }
 
 const upFrom = (breakpoint: Breakpoint): Breakpoint[] => {
@@ -199,7 +199,7 @@ export default class Hidden extends React.Component<HiddenProps, HiddenState> {
 
   private _onResizeInvoker = () => this._onResizeDebounced();
 
-  render(): React.ReactNode | null {
+  render(): any | null {
     if (this.state.visible) {
       const { children } = this.props;
 
