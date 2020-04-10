@@ -200,7 +200,9 @@ export declare type GridProps = {
   wrap?: "nowrap" | "wrap" | "wrap-reverse";
   zeroMinWidth?: boolean;
   style?: React.CSSProperties;
-  ref?: React.Ref<any> | ((ref: React.ReactInstance | HTMLElement) => void);
+  forwardRef?:
+    | React.Ref<any>
+    | ((ref: React.ReactInstance | HTMLElement) => void);
 };
 
 export declare type Grid = (props: GridProps) => React.ReactElement<Grid>;
@@ -259,7 +261,7 @@ const Grid: Grid = (props: GridProps) => {
     maximize = false,
     relative = false,
     children = null,
-    ref = null,
+    forwardRef = null,
     ...other
   } = props;
 
@@ -378,14 +380,19 @@ const Grid: Grid = (props: GridProps) => {
     const style = { ...other.style, ...debugStyles };
 
     return (
-      <Component className={className} ref={ref} {...other} style={style}>
+      <Component
+        className={className}
+        ref={forwardRef}
+        {...other}
+        style={style}
+      >
         {children}
       </Component>
     );
   }
 
   return (
-    <Component className={className} ref={ref} {...other}>
+    <Component className={className} ref={forwardRef} {...other}>
       {children}
     </Component>
   );
