@@ -6,15 +6,36 @@ import debounce from "./debounce";
 let keysDsc = [...keys].reverse();
 let listeners: (() => void)[] = [];
 
-window.addEventListener(
-  "resize",
-  () => {
-    for (const listener of listeners) {
-      listener();
-    }
-  },
-  false
-);
+if (typeof window.matchMedia === "function") {
+  for (const [i, key] of keys.entries()) {
+    const start = key;
+    const end = keys[i + 1];
+
+    const media = window.matchMedia(
+      breakpoints.between(start, end).replace("@media", "").trim()
+    );
+
+    media.addListener(() => {
+      if (process.env.NODE_ENV !== "production") {
+        console.log("Fired listener for media items");
+      }
+
+      for (const listener of listeners) {
+        listener();
+      }
+    });
+  }
+} else {
+  window.addEventListener(
+    "resize",
+    () => {
+      for (const listener of listeners) {
+        listener();
+      }
+    },
+    false
+  );
+}
 
 interface HiddenState {
   visible: boolean;
@@ -87,9 +108,11 @@ export default class Hidden extends React.Component<HiddenProps, HiddenState> {
       visible: this._isVisible(breakPoint),
     };
 
+    const { debounce = 5 } = props;
+
     this._onResizeDebounced = this._getSafeDebounceResize(
       this._onResize,
-      props.debounce
+      debounce
     );
   }
 
@@ -103,7 +126,7 @@ export default class Hidden extends React.Component<HiddenProps, HiddenState> {
   }
 
   componentWillReceiveProps(nextProps: HiddenProps) {
-    const debounce = nextProps.debounce;
+    const { debounce = 5 } = nextProps;
 
     if (this.props.debounce !== debounce) {
       this._onResizeDebounced = this._getSafeDebounceResize(

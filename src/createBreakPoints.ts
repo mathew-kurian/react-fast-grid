@@ -63,18 +63,10 @@ export default function createBreakpoints(
       return up(start);
     }
 
-    return (
-      `@media (min-width:${
-        typeof values[start] === "number" ? values[start] : start
-      }${unit}) and ` +
-      `(max-width:${
-        // @ts-ignore
-        (endIndex !== -1 && typeof values[keys[endIndex + 1]] === "number"
-          ? values[keys[endIndex + 1]]
-          : end) -
-        step / 100
-      }${unit})`
-    );
+    const lowerbound = values[start];
+    const upperbound = values[keys[endIndex + 1]] - step / 100;
+
+    return `@media (min-width:${lowerbound}${unit}) and (max-width:${upperbound}${unit})`;
   }
 
   function only(key: Breakpoint): string {
