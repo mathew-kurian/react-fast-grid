@@ -53,20 +53,9 @@ export interface HiddenProps {
   xlUp?: boolean;
   xlDown?: boolean;
   only?: Breakpoint | Breakpoint[];
-  children?: React.ReactNode;
   debounce?: number;
+  children?: React.ReactNode;
 }
-
-export const isHiddenComponent = (
-  element: any
-): element is React.ReactElement<HiddenProps> => {
-  return (
-    element != null &&
-    typeof element === "object" &&
-    element.type &&
-    element.type === Hidden
-  );
-};
 
 const upFrom = (breakpoint: Breakpoint): Breakpoint[] => {
   return keys.slice(keys.indexOf(breakpoint));
@@ -96,7 +85,7 @@ const upDownMap: UpDownMap = {
 };
 
 export default class Hidden extends React.Component<HiddenProps, HiddenState> {
-  _onResizeDebounced: () => void;
+  private _onResizeDebounced: () => void;
 
   constructor(props: HiddenProps) {
     super(props);
@@ -116,7 +105,7 @@ export default class Hidden extends React.Component<HiddenProps, HiddenState> {
     );
   }
 
-  _getSafeDebounceResize<T extends Function>(
+  private _getSafeDebounceResize<T extends Function>(
     callback: T,
     timeout: number | undefined
   ): T {
@@ -146,7 +135,7 @@ export default class Hidden extends React.Component<HiddenProps, HiddenState> {
     );
   }
 
-  _getBreakPoint = (width: number): Breakpoint => {
+  private _getBreakPoint = (width: number): Breakpoint => {
     const breakPointValues = breakpoints.values;
 
     for (const key of keysDsc) {
@@ -158,7 +147,7 @@ export default class Hidden extends React.Component<HiddenProps, HiddenState> {
     return "xl";
   };
 
-  _getTrueKeyInProp = (): keyof UpDownMap | null => {
+  private _getTrueKeyInProp = (): keyof UpDownMap | null => {
     const props = this.props;
 
     for (const key in upDownMap) {
@@ -171,7 +160,7 @@ export default class Hidden extends React.Component<HiddenProps, HiddenState> {
     return null;
   };
 
-  _isVisible = (breakPoint: Breakpoint): boolean => {
+  private _isVisible = (breakPoint: Breakpoint): boolean => {
     const { only } = this.props;
 
     if (Array.isArray(only)) {
@@ -189,8 +178,8 @@ export default class Hidden extends React.Component<HiddenProps, HiddenState> {
     return false;
   };
 
-  _lastBreakPoint: Breakpoint | null = null;
-  _onResize = () => {
+  private _lastBreakPoint: Breakpoint | null = null;
+  private _onResize = () => {
     const width = window.innerWidth;
     const breakPoint = this._getBreakPoint(width);
 
@@ -208,11 +197,15 @@ export default class Hidden extends React.Component<HiddenProps, HiddenState> {
     this._lastBreakPoint = breakPoint;
   };
 
-  _onResizeInvoker = () => this._onResizeDebounced();
+  private _onResizeInvoker = () => this._onResizeDebounced();
 
-  render() {
+  render(): React.ReactNode | null {
     if (this.state.visible) {
-      return this.props.children;
+      const { children } = this.props;
+
+      if (children !== undefined) {
+        return children;
+      }
     }
 
     return null;

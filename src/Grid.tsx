@@ -15,7 +15,7 @@ import { breakpoints, generateGutter, generateGrid } from "./gridHelpers";
 import { Breakpoint } from "./createBreakPoints";
 // @ts-ignore
 import injectSheet from "react-jss";
-import Hidden, { isHiddenComponent } from "./Hidden";
+import Hidden, { HiddenProps } from "./Hidden";
 
 const baseStyles = {
   /* Styles applied to the root element */
@@ -212,6 +212,17 @@ const isGridComponent = (
     element.type &&
     element.type.InnerComponent &&
     element.type.InnerComponent === Grid
+  );
+};
+
+const isHiddenComponent = (
+  element: any
+): element is React.ReactElement<HiddenProps> => {
+  return (
+    element != null &&
+    typeof element === "object" &&
+    element.type &&
+    element.type === Hidden
   );
 };
 
