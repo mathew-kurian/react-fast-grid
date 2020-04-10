@@ -398,7 +398,7 @@ const Grid: Grid = (props: GridProps) => {
   );
 };
 
-const StyledGrid: Grid = injectSheet(styles)(Grid);
+const StyledGrid: Grid = (injectSheet(styles)(Grid) as unknown) as Grid;
 
 export { Hidden };
 

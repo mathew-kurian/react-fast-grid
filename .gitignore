@@ -6,3 +6,4 @@ yarn.lock
 lib/
 .DS_Store
 package-lock.json
+coverage/

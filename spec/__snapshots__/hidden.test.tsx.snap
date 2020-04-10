@@ -1,0 +1,451 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test viewport.lg against lg rules 1`] = `"lgDown=true"`;
+
+exports[`Test viewport.lg against lg rules 2`] = `"lgDown=true"`;
+
+exports[`Test viewport.lg against lg rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.lg against lg rules 4`] = `null`;
+
+exports[`Test viewport.lg against lg rules 5`] = `null`;
+
+exports[`Test viewport.lg against lg rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.lg against md rules 1`] = `"mdDown=true"`;
+
+exports[`Test viewport.lg against md rules 2`] = `"mdDown=true"`;
+
+exports[`Test viewport.lg against md rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.lg against md rules 4`] = `null`;
+
+exports[`Test viewport.lg against md rules 5`] = `null`;
+
+exports[`Test viewport.lg against md rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.lg against sm rules 1`] = `"smDown=true"`;
+
+exports[`Test viewport.lg against sm rules 2`] = `"smDown=true"`;
+
+exports[`Test viewport.lg against sm rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.lg against sm rules 4`] = `null`;
+
+exports[`Test viewport.lg against sm rules 5`] = `null`;
+
+exports[`Test viewport.lg against sm rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.lg against xl rules 1`] = `null`;
+
+exports[`Test viewport.lg against xl rules 2`] = `null`;
+
+exports[`Test viewport.lg against xl rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.lg against xl rules 4`] = `null`;
+
+exports[`Test viewport.lg against xl rules 5`] = `null`;
+
+exports[`Test viewport.lg against xl rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.lg against xs rules 1`] = `"xsDown=true"`;
+
+exports[`Test viewport.lg against xs rules 2`] = `"xsDown=true"`;
+
+exports[`Test viewport.lg against xs rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.lg against xs rules 4`] = `null`;
+
+exports[`Test viewport.lg against xs rules 5`] = `null`;
+
+exports[`Test viewport.lg against xs rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.md against lg rules 1`] = `null`;
+
+exports[`Test viewport.md against lg rules 2`] = `null`;
+
+exports[`Test viewport.md against lg rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.md against lg rules 4`] = `"lgUp=true"`;
+
+exports[`Test viewport.md against lg rules 5`] = `"lgUp=true"`;
+
+exports[`Test viewport.md against lg rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.md against md rules 1`] = `null`;
+
+exports[`Test viewport.md against md rules 2`] = `null`;
+
+exports[`Test viewport.md against md rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.md against md rules 4`] = `null`;
+
+exports[`Test viewport.md against md rules 5`] = `null`;
+
+exports[`Test viewport.md against md rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.md against sm rules 1`] = `"smDown=true"`;
+
+exports[`Test viewport.md against sm rules 2`] = `"smDown=true"`;
+
+exports[`Test viewport.md against sm rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.md against sm rules 4`] = `null`;
+
+exports[`Test viewport.md against sm rules 5`] = `null`;
+
+exports[`Test viewport.md against sm rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.md against xl rules 1`] = `null`;
+
+exports[`Test viewport.md against xl rules 2`] = `null`;
+
+exports[`Test viewport.md against xl rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.md against xl rules 4`] = `"xlUp=true"`;
+
+exports[`Test viewport.md against xl rules 5`] = `"xlUp=true"`;
+
+exports[`Test viewport.md against xl rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.md against xs rules 1`] = `"xsDown=true"`;
+
+exports[`Test viewport.md against xs rules 2`] = `"xsDown=true"`;
+
+exports[`Test viewport.md against xs rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.md against xs rules 4`] = `null`;
+
+exports[`Test viewport.md against xs rules 5`] = `null`;
+
+exports[`Test viewport.md against xs rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.sm against lg rules 1`] = `null`;
+
+exports[`Test viewport.sm against lg rules 2`] = `null`;
+
+exports[`Test viewport.sm against lg rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.sm against lg rules 4`] = `"lgUp=true"`;
+
+exports[`Test viewport.sm against lg rules 5`] = `"lgUp=true"`;
+
+exports[`Test viewport.sm against lg rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.sm against md rules 1`] = `null`;
+
+exports[`Test viewport.sm against md rules 2`] = `null`;
+
+exports[`Test viewport.sm against md rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.sm against md rules 4`] = `"mdUp=true"`;
+
+exports[`Test viewport.sm against md rules 5`] = `"mdUp=true"`;
+
+exports[`Test viewport.sm against md rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.sm against sm rules 1`] = `null`;
+
+exports[`Test viewport.sm against sm rules 2`] = `null`;
+
+exports[`Test viewport.sm against sm rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.sm against sm rules 4`] = `null`;
+
+exports[`Test viewport.sm against sm rules 5`] = `null`;
+
+exports[`Test viewport.sm against sm rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.sm against xl rules 1`] = `null`;
+
+exports[`Test viewport.sm against xl rules 2`] = `null`;
+
+exports[`Test viewport.sm against xl rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.sm against xl rules 4`] = `"xlUp=true"`;
+
+exports[`Test viewport.sm against xl rules 5`] = `"xlUp=true"`;
+
+exports[`Test viewport.sm against xl rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.sm against xs rules 1`] = `"xsDown=true"`;
+
+exports[`Test viewport.sm against xs rules 2`] = `"xsDown=true"`;
+
+exports[`Test viewport.sm against xs rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.sm against xs rules 4`] = `null`;
+
+exports[`Test viewport.sm against xs rules 5`] = `null`;
+
+exports[`Test viewport.sm against xs rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xl against lg rules 1`] = `"lgDown=true"`;
+
+exports[`Test viewport.xl against lg rules 2`] = `"lgDown=true"`;
+
+exports[`Test viewport.xl against lg rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xl against lg rules 4`] = `null`;
+
+exports[`Test viewport.xl against lg rules 5`] = `null`;
+
+exports[`Test viewport.xl against lg rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xl against md rules 1`] = `"mdDown=true"`;
+
+exports[`Test viewport.xl against md rules 2`] = `"mdDown=true"`;
+
+exports[`Test viewport.xl against md rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xl against md rules 4`] = `null`;
+
+exports[`Test viewport.xl against md rules 5`] = `null`;
+
+exports[`Test viewport.xl against md rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xl against sm rules 1`] = `"smDown=true"`;
+
+exports[`Test viewport.xl against sm rules 2`] = `"smDown=true"`;
+
+exports[`Test viewport.xl against sm rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xl against sm rules 4`] = `null`;
+
+exports[`Test viewport.xl against sm rules 5`] = `null`;
+
+exports[`Test viewport.xl against sm rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xl against xl rules 1`] = `null`;
+
+exports[`Test viewport.xl against xl rules 2`] = `null`;
+
+exports[`Test viewport.xl against xl rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xl against xl rules 4`] = `null`;
+
+exports[`Test viewport.xl against xl rules 5`] = `null`;
+
+exports[`Test viewport.xl against xl rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xl against xs rules 1`] = `"xsDown=true"`;
+
+exports[`Test viewport.xl against xs rules 2`] = `"xsDown=true"`;
+
+exports[`Test viewport.xl against xs rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xl against xs rules 4`] = `null`;
+
+exports[`Test viewport.xl against xs rules 5`] = `null`;
+
+exports[`Test viewport.xl against xs rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xs against lg rules 1`] = `null`;
+
+exports[`Test viewport.xs against lg rules 2`] = `null`;
+
+exports[`Test viewport.xs against lg rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xs against lg rules 4`] = `"lgUp=true"`;
+
+exports[`Test viewport.xs against lg rules 5`] = `"lgUp=true"`;
+
+exports[`Test viewport.xs against lg rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xs against md rules 1`] = `null`;
+
+exports[`Test viewport.xs against md rules 2`] = `null`;
+
+exports[`Test viewport.xs against md rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xs against md rules 4`] = `"mdUp=true"`;
+
+exports[`Test viewport.xs against md rules 5`] = `"mdUp=true"`;
+
+exports[`Test viewport.xs against md rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xs against sm rules 1`] = `null`;
+
+exports[`Test viewport.xs against sm rules 2`] = `null`;
+
+exports[`Test viewport.xs against sm rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xs against sm rules 4`] = `"smUp=true"`;
+
+exports[`Test viewport.xs against sm rules 5`] = `"smUp=true"`;
+
+exports[`Test viewport.xs against sm rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xs against xl rules 1`] = `null`;
+
+exports[`Test viewport.xs against xl rules 2`] = `null`;
+
+exports[`Test viewport.xs against xl rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xs against xl rules 4`] = `"xlUp=true"`;
+
+exports[`Test viewport.xs against xl rules 5`] = `"xlUp=true"`;
+
+exports[`Test viewport.xs against xl rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xs against xs rules 1`] = `null`;
+
+exports[`Test viewport.xs against xs rules 2`] = `null`;
+
+exports[`Test viewport.xs against xs rules 3`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;
+
+exports[`Test viewport.xs against xs rules 4`] = `null`;
+
+exports[`Test viewport.xs against xs rules 5`] = `null`;
+
+exports[`Test viewport.xs against xs rules 6`] = `
+"Snapshot Diff:
+Compared values have no visual difference."
+`;

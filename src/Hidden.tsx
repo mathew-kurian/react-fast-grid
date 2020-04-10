@@ -3,40 +3,6 @@ import { Breakpoint, keys } from "./createBreakPoints";
 import { breakpoints } from "./gridHelpers";
 import debounce from "./debounce";
 
-let keysDsc = [...keys].reverse();
-let listeners: (() => void)[] = [];
-
-if (typeof window.matchMedia === "function") {
-  for (const [i, key] of keys.entries()) {
-    const start = key;
-    const end = keys[i + 1];
-
-    const media = window.matchMedia(
-      breakpoints.between(start, end).replace("@media", "").trim()
-    );
-
-    media.addListener(() => {
-      if (process.env.NODE_ENV !== "production") {
-        console.log("Fired listener for media items");
-      }
-
-      for (const listener of listeners) {
-        listener();
-      }
-    });
-  }
-} else {
-  window.addEventListener(
-    "resize",
-    () => {
-      for (const listener of listeners) {
-        listener();
-      }
-    },
-    false
-  );
-}
-
 interface HiddenState {
   visible: boolean;
 }
@@ -58,37 +24,82 @@ export interface HiddenProps {
 }
 
 const upFrom = (breakpoint: Breakpoint): Breakpoint[] => {
-  return keys.slice(keys.indexOf(breakpoint));
+  return keys.slice(keys.indexOf(breakpoint) + 1);
 };
 
 const downFrom = (breakpoint: Breakpoint): Breakpoint[] => {
-  return keys.slice(0, keys.indexOf(breakpoint) + 1);
+  return keys.slice(0, keys.indexOf(breakpoint));
 };
 
-type UpDownMap = {
+type VisibilityMap = {
   [key in keyof Required<
     Omit<HiddenProps, "children" | "only" | "debounce">
   >]: Breakpoint[];
 };
 
-const upDownMap: UpDownMap = {
-  xsUp: upFrom("xs"),
-  xsDown: downFrom("xs"),
-  smUp: upFrom("sm"),
-  smDown: downFrom("sm"),
-  mdUp: upFrom("md"),
-  mdDown: downFrom("md"),
-  lgUp: upFrom("lg"),
-  lgDown: downFrom("lg"),
-  xlUp: upFrom("xl"),
-  xlDown: downFrom("xl"),
+export const VisibilityMap: VisibilityMap = {
+  xsUp: downFrom("xs"),
+  xsDown: upFrom("xs"),
+  smUp: downFrom("sm"),
+  smDown: upFrom("sm"),
+  mdUp: downFrom("md"),
+  mdDown: upFrom("md"),
+  lgUp: downFrom("lg"),
+  lgDown: upFrom("lg"),
+  xlUp: downFrom("xl"),
+  xlDown: upFrom("xl"),
 };
 
 export default class Hidden extends React.Component<HiddenProps, HiddenState> {
+  private static keysDsc = [...keys].reverse();
+  private static init_: boolean = false;
+  private static listeners_: (() => void)[] = [];
+
+  private static init() {
+    if (Hidden.init_) {
+      return;
+    }
+
+    Hidden.init_ = true;
+
+    if (typeof window.matchMedia === "function") {
+      for (const [i, key] of keys.entries()) {
+        const start = key;
+        const end = keys[i + 1];
+
+        const media = window.matchMedia(
+          breakpoints.between(start, end).replace("@media", "").trim()
+        );
+
+        media.addListener(() => {
+          if (process.env.NODE_ENV !== "production") {
+            console.log("Fired listener for media items");
+          }
+
+          for (const listener of Hidden.listeners_) {
+            listener();
+          }
+        });
+      }
+    } else {
+      window.addEventListener(
+        "resize",
+        () => {
+          for (const listener of Hidden.listeners_) {
+            listener();
+          }
+        },
+        false
+      );
+    }
+  }
+
   private _onResizeDebounced: () => void;
 
   constructor(props: HiddenProps) {
     super(props);
+
+    Hidden.init();
 
     const width = window.innerWidth;
     const breakPoint = this._getBreakPoint(width);
@@ -126,11 +137,11 @@ export default class Hidden extends React.Component<HiddenProps, HiddenState> {
   }
 
   componentDidMount() {
-    listeners.push(this._onResizeInvoker);
+    Hidden.listeners_.push(this._onResizeInvoker);
   }
 
   componentWillUnmount() {
-    listeners = listeners.filter(
+    Hidden.listeners_ = Hidden.listeners_.filter(
       (listener) => listener !== this._onResizeInvoker
     );
   }
@@ -138,7 +149,7 @@ export default class Hidden extends React.Component<HiddenProps, HiddenState> {
   private _getBreakPoint = (width: number): Breakpoint => {
     const breakPointValues = breakpoints.values;
 
-    for (const key of keysDsc) {
+    for (const key of Hidden.keysDsc) {
       if (width >= breakPointValues[key]) {
         return key;
       }
@@ -147,13 +158,13 @@ export default class Hidden extends React.Component<HiddenProps, HiddenState> {
     return "xl";
   };
 
-  private _getTrueKeyInProp = (): keyof UpDownMap | null => {
+  private _getTrueKeyInProp = (): keyof VisibilityMap | null => {
     const props = this.props;
 
-    for (const key in upDownMap) {
+    for (const key in VisibilityMap) {
       // @ts-ignore
       if (props[key] === true) {
-        return key as keyof UpDownMap;
+        return key as keyof VisibilityMap;
       }
     }
 
@@ -164,18 +175,18 @@ export default class Hidden extends React.Component<HiddenProps, HiddenState> {
     const { only } = this.props;
 
     if (Array.isArray(only)) {
-      return only.includes(breakPoint);
+      return !only.includes(breakPoint);
     } else if (typeof only === "string") {
-      return only === breakPoint;
+      return only !== breakPoint;
     }
 
     const trueKey = this._getTrueKeyInProp();
 
     if (trueKey !== null) {
-      return upDownMap[trueKey].includes(breakPoint);
+      return VisibilityMap[trueKey].includes(breakPoint);
     }
 
-    return false;
+    return true;
   };
 
   private _lastBreakPoint: Breakpoint | null = null;

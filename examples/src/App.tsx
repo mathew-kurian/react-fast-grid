@@ -5,19 +5,19 @@ import { Example1, Example2, Example3, Example4 } from "./components/Examples";
 export default function App() {
   return (
     <Grid container spacing={4} style={{ padding: 20 }} direction="column">
-      <Hidden only="xs" debounce={300}>
+      <Hidden only={["sm", "md", "lg", "xl"]} debounce={300}>
         <Grid item>Test 1: xs</Grid>
       </Hidden>
-      <Hidden only="sm" debounce={300}>
+      <Hidden only={["xs", "md", "lg", "xl"]} debounce={300}>
         <Grid item>Test 1: sm</Grid>
       </Hidden>
-      <Hidden only="md" debounce={300}>
+      <Hidden only={["xs", "sm", "lg", "xl"]} debounce={300}>
         <Grid item>Test 1: md</Grid>
       </Hidden>
-      <Hidden only="lg" debounce={300}>
+      <Hidden only={["xs", "sm", "md", "xl"]} debounce={300}>
         <Grid item>Test 1: lg</Grid>
       </Hidden>
-      <Hidden only="xl" debounce={300}>
+      <Hidden only={["xs", "sm", "md", "lg"]} debounce={300}>
         <Grid item>Test 1: xl</Grid>
       </Hidden>
       <Hidden xsUp debounce={300}>
