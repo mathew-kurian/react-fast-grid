@@ -51,9 +51,9 @@ export default function App() {
         <Grid item>Test 3: xs,sm,md,lg,xl</Grid>
       </Hidden>
       <div />
-      <Grid item>
+      <Grid.Strict item component="div" tabIndex={0}>
         <Example1 />
-      </Grid>
+      </Grid.Strict>
       <Grid item>
         <Example2 />
       </Grid>

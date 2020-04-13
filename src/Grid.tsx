@@ -166,6 +166,17 @@ export declare type GridSize =
   | 11
   | 12;
 
+interface HTMLProps {
+  div: React.HTMLAttributes<HTMLDivElement>;
+  button: React.HTMLAttributes<HTMLButtonElement>;
+  span: React.HTMLAttributes<HTMLSpanElement>;
+  a: React.HTMLAttributes<HTMLAnchorElement>;
+  iframe: React.HTMLAttributes<HTMLIFrameElement>;
+  image: React.HTMLAttributes<HTMLImageElement>;
+  input: React.HTMLAttributes<HTMLInputElement>;
+  object: React.HTMLAttributes<HTMLObjectElement>;
+}
+
 export declare type GridProps = {
   alignContent?:
     | "stretch"
@@ -177,7 +188,6 @@ export declare type GridProps = {
   alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
   children?: React.ReactNode;
   className?: string;
-  component?: any;
   spacing?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
   container?: boolean;
   direction?: "row" | "row-reverse" | "column" | "column-reverse";
@@ -185,6 +195,7 @@ export declare type GridProps = {
   relative?: boolean;
   maximize?: boolean;
   classes?: any;
+  component?: React.ReactType;
   justify?:
     | "flex-start"
     | "center"
@@ -205,15 +216,20 @@ export declare type GridProps = {
     | ((ref: React.ReactInstance | HTMLElement) => void);
 };
 
-export declare type Grid = (props: GridProps) => React.ReactElement<Grid>;
+export declare type GridBase<T extends GridProps> = (
+  props: T
+) => React.ReactElement<T>;
 
 const isGridComponent = (
   element: any
 ): element is React.ReactElement<GridProps> => {
   return (
-    element.type &&
-    element.type.InnerComponent &&
-    element.type.InnerComponent === Grid
+    (element &&
+      element.type &&
+      element.type.InnerComponent &&
+      element.type.InnerComponent === GridBase) ||
+    (element && element.type === GridStrict) ||
+    (element && element.type === Grid)
   );
 };
 
@@ -239,13 +255,13 @@ const isReactElement = (element: any): element is React.ReactElement => {
 export const debugStyles = {};
 
 // TODO update to use SFC/FunctionComponent
-const Grid: Grid = (props: GridProps) => {
+function GridBase<T extends GridProps>(props: T): React.ReactElement<T> {
   const {
     classes,
     alignContent = "stretch",
     alignItems = "stretch",
     className: classNameProp,
-    component: Component = "div",
+    component: Component_ = "div",
     container = false,
     direction = "row",
     item = false,
@@ -380,26 +396,57 @@ const Grid: Grid = (props: GridProps) => {
     const style = { ...other.style, ...debugStyles };
 
     return (
-      <Component
+      <Component_
         className={className}
         ref={forwardRef}
         {...other}
         style={style}
       >
         {children}
-      </Component>
+      </Component_>
     );
   }
 
   return (
-    <Component className={className} ref={forwardRef} {...other}>
+    <Component_ className={className} ref={forwardRef} {...other}>
       {children}
-    </Component>
+    </Component_>
   );
+}
+
+declare type GridPropsStrict<T extends keyof HTMLProps> = GridProps & {
+  component?: T;
+} & HTMLProps[T];
+
+declare type GridPropsUnrestricted<T extends React.ReactType> = GridProps & {
+  component?: T;
 };
 
-const StyledGrid: Grid = (injectSheet(styles)(Grid) as unknown) as Grid;
+interface StyledGridType {
+  <T extends GridProps>(props: T): React.ReactElement<T>;
+}
+
+const StyledGrid: StyledGridType = (injectSheet(styles)(
+  GridBase
+) as unknown) as StyledGridType;
+
+function GridStrict<T extends keyof HTMLProps = "div">(
+  props: GridPropsStrict<T>
+): React.ReactElement<GridPropsStrict<T>> {
+  // @ts-ignore
+  return <StyledGrid {...props} />;
+}
+
+function Grid<T extends React.ReactType>(
+  props: GridPropsUnrestricted<T>
+): React.ReactElement<GridPropsUnrestricted<T>> {
+  return <StyledGrid {...props} />;
+}
+
+Grid.Strict = GridStrict;
 
 export { Hidden };
 
-export default StyledGrid;
+export default Grid;
+
+export { GridStrict };

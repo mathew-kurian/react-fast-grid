@@ -23,6 +23,30 @@ export interface HiddenProps {
   children?: any;
 }
 
+// const isTouchDevice: boolean = ((): boolean => {
+//   const prefixes = " -webkit- -moz- -o- -ms- ".split(" ");
+
+//   const mq = (query: string) => {
+//     return window.matchMedia && window.matchMedia(query).matches;
+//   };
+
+//   if (
+//     "ontouchstart" in window ||
+//     // @ts-ignore
+//     (window.DocumentTouch && document instanceof DocumentTouch)
+//   ) {
+//     return true;
+//   }
+
+//   // include the 'heartz' as a way to have a non matching MQ to help terminate the join
+//   // https://git.io/vznFH
+//   const query = ["(", prefixes.join("touch-enabled),("), "heartz", ")"].join(
+//     ""
+//   );
+
+//   return mq(query);
+// })();
+
 const upFrom = (breakpoint: Breakpoint): Breakpoint[] => {
   return keys.slice(keys.indexOf(breakpoint) + 1);
 };
@@ -33,7 +57,7 @@ const downFrom = (breakpoint: Breakpoint): Breakpoint[] => {
 
 type VisibilityMap = {
   [key in keyof Required<
-    Omit<HiddenProps, "children" | "only" | "debounce">
+    Omit<HiddenProps, "children" | "only" | "debounce" | "touch">
   >]: Breakpoint[];
 };
 
