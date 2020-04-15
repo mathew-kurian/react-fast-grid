@@ -168,13 +168,13 @@ export declare type GridSize =
 
 interface HTMLProps {
   div: React.HTMLAttributes<HTMLDivElement>;
-  button: React.HTMLAttributes<HTMLButtonElement>;
+  button: React.ButtonHTMLAttributes<HTMLButtonElement>;
   span: React.HTMLAttributes<HTMLSpanElement>;
-  a: React.HTMLAttributes<HTMLAnchorElement>;
-  iframe: React.HTMLAttributes<HTMLIFrameElement>;
-  img: React.HTMLAttributes<HTMLImageElement>;
-  input: React.HTMLAttributes<HTMLInputElement>;
-  object: React.HTMLAttributes<HTMLObjectElement>;
+  a: React.AnchorHTMLAttributes<HTMLAnchorElement>;
+  iframe: React.IframeHTMLAttributes<HTMLIFrameElement>;
+  img: React.ImgHTMLAttributes<HTMLImageElement>;
+  input: React.InputHTMLAttributes<HTMLInputElement>;
+  object: React.ObjectHTMLAttributes<HTMLObjectElement>;
 }
 
 export declare type GridProps = {
