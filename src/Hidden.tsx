@@ -7,6 +7,8 @@ interface HiddenState {
   visible: boolean;
 }
 
+const reflect = (willHide: boolean) => willHide;
+
 export interface HiddenProps {
   xsUp?: boolean;
   xsDown?: boolean;
@@ -18,34 +20,11 @@ export interface HiddenProps {
   lgDown?: boolean;
   xlUp?: boolean;
   xlDown?: boolean;
+  predicate?: (willHide: boolean) => boolean;
   only?: Breakpoint | Breakpoint[];
   debounce?: number;
   children?: any;
 }
-
-// const isTouchDevice: boolean = ((): boolean => {
-//   const prefixes = " -webkit- -moz- -o- -ms- ".split(" ");
-
-//   const mq = (query: string) => {
-//     return window.matchMedia && window.matchMedia(query).matches;
-//   };
-
-//   if (
-//     "ontouchstart" in window ||
-//     // @ts-ignore
-//     (window.DocumentTouch && document instanceof DocumentTouch)
-//   ) {
-//     return true;
-//   }
-
-//   // include the 'heartz' as a way to have a non matching MQ to help terminate the join
-//   // https://git.io/vznFH
-//   const query = ["(", prefixes.join("touch-enabled),("), "heartz", ")"].join(
-//     ""
-//   );
-
-//   return mq(query);
-// })();
 
 const upFrom = (breakpoint: Breakpoint): Breakpoint[] => {
   return keys.slice(keys.indexOf(breakpoint) + 1);
@@ -57,7 +36,7 @@ const downFrom = (breakpoint: Breakpoint): Breakpoint[] => {
 
 type VisibilityMap = {
   [key in keyof Required<
-    Omit<HiddenProps, "children" | "only" | "debounce" | "touch">
+    Omit<HiddenProps, "children" | "only" | "debounce" | "predicate">
   >]: Breakpoint[];
 };
 
@@ -138,6 +117,16 @@ export default class Hidden extends React.Component<HiddenProps, HiddenState> {
       this._onResize,
       debounce
     );
+
+    if (process.env.NODE_ENV !== "production") {
+      const { predicate, ...otherProps } = props;
+
+      if (Object.keys(otherProps).length > 1) {
+        console.warn(
+          "[Hidden] is recommended to have only 1 prop except for `predicate` which can be in conjunction with another prop"
+        );
+      }
+    }
   }
 
   private _getSafeDebounceResize<T extends Function>(
@@ -149,7 +138,8 @@ export default class Hidden extends React.Component<HiddenProps, HiddenState> {
       : callback;
   }
 
-  componentWillReceiveProps(nextProps: HiddenProps) {
+  // support React 15+
+  shouldComponentUpdate(nextProps: HiddenProps) {
     const { debounce = 5 } = nextProps;
 
     if (this.props.debounce !== debounce) {
@@ -158,6 +148,8 @@ export default class Hidden extends React.Component<HiddenProps, HiddenState> {
         debounce
       );
     }
+
+    return true;
   }
 
   componentDidMount() {
@@ -182,7 +174,7 @@ export default class Hidden extends React.Component<HiddenProps, HiddenState> {
     return "xl";
   };
 
-  private _getTrueKeyInProp = (): keyof VisibilityMap | null => {
+  private _getTrueKeyInProps = (): keyof VisibilityMap | null => {
     const props = this.props;
 
     for (const key in VisibilityMap) {
@@ -196,21 +188,23 @@ export default class Hidden extends React.Component<HiddenProps, HiddenState> {
   };
 
   private _isVisible = (breakPoint: Breakpoint): boolean => {
-    const { only } = this.props;
+    const { only, predicate = reflect } = this.props;
+
+    let isVisible = true;
 
     if (Array.isArray(only)) {
-      return !only.includes(breakPoint);
+      isVisible = !only.includes(breakPoint);
     } else if (typeof only === "string") {
-      return only !== breakPoint;
+      isVisible = only !== breakPoint;
+    } else {
+      const trueKey = this._getTrueKeyInProps();
+
+      if (trueKey !== null) {
+        isVisible = VisibilityMap[trueKey].includes(breakPoint);
+      }
     }
 
-    const trueKey = this._getTrueKeyInProp();
-
-    if (trueKey !== null) {
-      return VisibilityMap[trueKey].includes(breakPoint);
-    }
-
-    return true;
+    return !predicate(!isVisible);
   };
 
   private _lastBreakPoint: Breakpoint | null = null;
