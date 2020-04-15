@@ -172,7 +172,7 @@ interface HTMLProps {
   span: React.HTMLAttributes<HTMLSpanElement>;
   a: React.HTMLAttributes<HTMLAnchorElement>;
   iframe: React.HTMLAttributes<HTMLIFrameElement>;
-  image: React.HTMLAttributes<HTMLImageElement>;
+  img: React.HTMLAttributes<HTMLImageElement>;
   input: React.HTMLAttributes<HTMLInputElement>;
   object: React.HTMLAttributes<HTMLObjectElement>;
 }
