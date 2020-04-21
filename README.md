@@ -1,4 +1,5 @@
 # React Fast Grid (+ Hidden)
+![CI](https://github.com/mathew-kurian/react-fast-grid/workflows/CI/badge.svg)
 
 [![Edit React Fast Grid](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/grid-layout-wrc4q?fontsize=14&hidenavigation=1&theme=dark)
 
