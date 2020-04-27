@@ -5,8 +5,8 @@
   "keywords": [],
   "main": "./src/index.tsx",
   "dependencies": {
+    "core-js": "^3.6.5",
     "react": "16.13.1",
-    "react-app-polyfill": "^1.0.6",
     "react-dom": "16.13.1",
     "react-fast-grid": "latest",
     "react-icons": "^3.9.0",

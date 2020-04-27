@@ -11,7 +11,7 @@ export default <T extends Function>(
     const args = arguments;
     const later = () => {
       timeout = 0;
-      if (!immediate) func.apply(arguments);
+      if (!immediate) func.apply(null, args);
     };
 
     let callNow = immediate && !timeout;
@@ -19,7 +19,7 @@ export default <T extends Function>(
     timeout = (setTimeout(later, wait) as unknown) as TimerID;
 
     if (callNow) {
-      func.apply(arguments, args);
+      func.apply(null, args);
     }
   } as unknown) as T;
 };

@@ -61,7 +61,7 @@ export function generateGrid(
       ...styles[COLUMN_CLASS],
       ["& > $" + key]: {
         ...styles[key],
-        maxWidth: "unset",
+        maxWidth: "none",
         maxHeight: styles[key].maxWidth,
       },
     };
