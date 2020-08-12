@@ -1,5 +1,5 @@
 import * as React from "react";
-import Grid from "../../../";
+import Grid from "../../lib/Grid";
 import { IoIosCheckmarkCircleOutline, IoMdMenu } from "react-icons/io";
 
 const styles = {

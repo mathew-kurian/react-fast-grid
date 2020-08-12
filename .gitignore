@@ -7,4 +7,4 @@ dist/
 .DS_Store
 package-lock.json
 coverage/
-examples/build
+public/scripts/
