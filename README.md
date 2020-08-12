@@ -9,7 +9,7 @@
 Useful algorithm extracted from [Material-UI Grid](https://material-ui.com/components/grid/#grid) and [Material-UI Hidden](https://material-ui.com/components/hidden/)
 
 ```
-npm install react-fast-grid react-jss@^8.6.1 --save
+npm install react-fast-grid
 ```
 
 ## IE11 Comptability

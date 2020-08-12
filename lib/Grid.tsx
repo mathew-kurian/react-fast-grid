@@ -14,8 +14,9 @@ import clsx from "clsx";
 import { breakpoints, generateGutter, generateGrid } from "./gridHelpers";
 import { Breakpoint } from "./createBreakPoints";
 // @ts-ignore
-import injectSheet from "react-jss";
 import Hidden, { HiddenProps } from "./Hidden";
+import jss, { StyleSheet } from "jss";
+import preset from "jss-preset-default";
 
 const baseStyles = {
   /* Styles applied to the root element */
@@ -259,10 +260,18 @@ export const debug = {
   useReadableTagNames: true,
 };
 
+let injectedSheet: StyleSheet<string | number | symbol> | null = null;
+
 // TODO update to use SFC/FunctionComponent
 function GridBase<T extends GridProps>(props: T): React.ReactElement<T> {
+  if (!injectedSheet) {
+    jss.setup(preset());
+    injectedSheet = jss.createStyleSheet(styles).attach();
+  }
+
+  const classes = injectedSheet.classes;
+
   let {
-    classes,
     alignContent = "stretch",
     alignItems = "stretch",
     className: classNameProp,
@@ -403,17 +412,24 @@ function GridBase<T extends GridProps>(props: T): React.ReactElement<T> {
 
   if (process.env.NODE_ENV !== "production") {
     const style = { ...other.style, ...debug.styles };
+    let classNameProperty = "className";
 
-    if (Component_ == null && debug.useReadableTagNames) {
-      // @ts-ignore
-      Component_ = "grid";
+    if (Component_ == null) {
+      if (debug.useReadableTagNames) {
+        classNameProperty = "class";
 
-      if (container) {
-        Component_ += "-container";
-      }
+        // @ts-ignore
+        Component_ = "grid";
 
-      if (item) {
-        Component_ += "-item";
+        if (container) {
+          Component_ += "-container";
+        }
+
+        if (item) {
+          Component_ += "-item";
+        }
+      } else {
+        Component_ = "div";
       }
     }
 
@@ -421,12 +437,12 @@ function GridBase<T extends GridProps>(props: T): React.ReactElement<T> {
       // @ts-ignore
       <Component_
         {...props}
-        classes={null}
         container={null}
         item={null}
-        class={className}
+        {...{ [classNameProperty]: className }}
         ref={forwardRef}
         {...other}
+        style={style}
       >
         {children}
       </Component_>
@@ -456,9 +472,7 @@ interface StyledGridType {
   <T extends GridProps>(props: T): React.ReactElement<T>;
 }
 
-const StyledGrid: StyledGridType = (injectSheet(styles)(
-  GridBase
-) as unknown) as StyledGridType;
+const StyledGrid: StyledGridType = GridBase as StyledGridType;
 
 function GridStrict<T extends keyof HTMLProps = "div">(
   props: GridPropsStrict<T>
