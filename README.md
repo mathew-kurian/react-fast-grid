@@ -10,6 +10,8 @@ Useful algorithm extracted from [Material-UI Grid](https://material-ui.com/compo
 npm install react-fast-grid react-jss@^8.6.1 --save
 ```
 
+### [Demo](https://react-fast-grid.vercel.app/)
+
 ## IE11 Comptability
 
 Supported on IE11+
