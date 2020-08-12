@@ -1,6 +1,6 @@
 {
   "name": "react-fast-grid",
-  "version": "3.0.0-semantic-release",
+  "version": "0.0.0-semantic-release",
   "main": "./dist/Grid.js",
   "typings": "./dist/Grid.d.ts",
   "scripts": {
