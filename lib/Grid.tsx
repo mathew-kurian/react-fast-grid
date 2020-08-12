@@ -265,7 +265,11 @@ let injectedSheet: StyleSheet<string | number | symbol> | null = null;
 // TODO update to use SFC/FunctionComponent
 function GridBase<T extends GridProps>(props: T): React.ReactElement<T> {
   if (!injectedSheet) {
-    jss.setup(preset());
+    jss.setup({
+      ...preset(),
+      id: { minify: process.env.NODE_ENV === "production" },
+    });
+
     injectedSheet = jss.createStyleSheet(styles).attach();
   }
 
