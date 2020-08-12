@@ -2,6 +2,8 @@
 
 ![CI](https://github.com/mathew-kurian/react-fast-grid/workflows/CI/badge.svg) [![npm version](https://badge.fury.io/js/react-fast-grid.svg)](https://badge.fury.io/js/react-fast-grid)
 
+### [Demo](https://react-fast-grid.vercel.app/)
+
 [![Edit React Fast Grid](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/grid-layout-wrc4q?fontsize=14&hidenavigation=1&theme=dark)
 
 Useful algorithm extracted from [Material-UI Grid](https://material-ui.com/components/grid/#grid) and [Material-UI Hidden](https://material-ui.com/components/hidden/)
@@ -9,8 +11,6 @@ Useful algorithm extracted from [Material-UI Grid](https://material-ui.com/compo
 ```
 npm install react-fast-grid react-jss@^8.6.1 --save
 ```
-
-### [Demo](https://react-fast-grid.vercel.app/)
 
 ## IE11 Comptability
 
