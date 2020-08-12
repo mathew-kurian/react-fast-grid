@@ -19,7 +19,9 @@ import Hidden, { HiddenProps } from "./Hidden";
 
 const baseStyles = {
   /* Styles applied to the root element */
-  root: {},
+  root: {
+    display: "block",
+  },
   /* Styles applied to the root element if `container={true}`. */
   container: {
     boxSizing: "border-box",

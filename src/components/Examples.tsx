@@ -109,7 +109,7 @@ export const Example4 = () => (
           {Array(50)
             .fill(0)
             .map((_, i) => (
-              <Grid key={i} item xs={12}>
+              <Grid key={i} item xs={12} style={{ padding: 2 }}>
                 <div>Last Name</div>
                 <input />
               </Grid>
