@@ -1,13 +1,13 @@
 import * as React from "react";
-import Grid from "react-fast-grid";
+import Grid from "../../../";
 import { IoIosCheckmarkCircleOutline, IoMdMenu } from "react-icons/io";
 
 const styles = {
   outer: {
     borderRadius: 5,
     boxShadow: "0 10px 30px #BBB",
-    padding: 10
-  }
+    padding: 10,
+  },
 };
 
 export const Example1 = () => (

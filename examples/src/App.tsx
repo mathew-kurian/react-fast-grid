@@ -1,5 +1,5 @@
 import * as React from "react";
-import Grid, { Hidden } from "react-fast-grid";
+import Grid, { Hidden } from "../../";
 import { Example1, Example2, Example3, Example4 } from "./components/Examples";
 
 export default function App() {

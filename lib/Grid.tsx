@@ -252,16 +252,19 @@ const isReactElement = (element: any): element is React.ReactElement => {
   return !!element.type;
 };
 
-export const debugStyles = {};
+export const debug = {
+  styles: {},
+  useReadableTagNames: true,
+};
 
 // TODO update to use SFC/FunctionComponent
 function GridBase<T extends GridProps>(props: T): React.ReactElement<T> {
-  const {
+  let {
     classes,
     alignContent = "stretch",
     alignItems = "stretch",
     className: classNameProp,
-    component: Component_ = "div",
+    component: Component_,
     container = false,
     direction = "row",
     item = false,
@@ -286,9 +289,13 @@ function GridBase<T extends GridProps>(props: T): React.ReactElement<T> {
     {
       [classes.container]: container,
       [classes.containerRow]:
-        container && (direction === "row" || direction === "row-reverse"),
+        container &&
+        !item &&
+        (direction === "row" || direction === "row-reverse"),
       [classes.containerColumn]:
-        container && (direction === "column" || direction === "column-reverse"),
+        container &&
+        !item &&
+        (direction === "column" || direction === "column-reverse"),
       [classes.item]: item,
       [classes.maximize]: maximize,
       [classes.relative]: relative,
@@ -393,18 +400,39 @@ function GridBase<T extends GridProps>(props: T): React.ReactElement<T> {
   }
 
   if (process.env.NODE_ENV !== "production") {
-    const style = { ...other.style, ...debugStyles };
+    const style = { ...other.style, ...debug.styles };
+
+    if (Component_ == null && debug.useReadableTagNames) {
+      // @ts-ignore
+      Component_ = "grid";
+
+      if (container) {
+        Component_ += "-container";
+      }
+
+      if (item) {
+        Component_ += "-item";
+      }
+    }
 
     return (
+      // @ts-ignore
       <Component_
-        className={className}
+        {...props}
+        classes={null}
+        container={null}
+        item={null}
+        class={className}
         ref={forwardRef}
         {...other}
-        style={style}
       >
         {children}
       </Component_>
     );
+  }
+
+  if (Component_ == null) {
+    Component_ = "div";
   }
 
   return (

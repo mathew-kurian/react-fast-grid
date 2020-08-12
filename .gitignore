@@ -3,7 +3,7 @@ node_modules/
 .vscode/
 yarn.lock
 *.log
-lib/
+dist/
 .DS_Store
 package-lock.json
 coverage/

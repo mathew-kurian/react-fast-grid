@@ -1,8 +1,8 @@
 {
   "name": "react-fast-grid",
-  "version": "2.1.7",
-  "main": "./lib/Grid.js",
-  "typings": "./lib/Grid.d.ts",
+  "version": "0.0.0-semantic-release",
+  "main": "./dist/Grid.js",
+  "typings": "./dist/Grid.d.ts",
   "scripts": {
     "prepare": "npm run build",
     "build": "npx tsc",
@@ -10,7 +10,7 @@
     "test": "npx jest ./spec/*.tsx --coverage"
   },
   "files": [
-    "lib"
+    "dist"
   ],
   "keywords": [
     "grid",
@@ -18,7 +18,7 @@
     "dynamic",
     "react"
   ],
-  "author": "Mathew Kurian <mwkurian@gmail.com.com>",
+  "author": "Mathew Kurian <mwkurian@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
