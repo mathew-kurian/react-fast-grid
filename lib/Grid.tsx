@@ -304,13 +304,9 @@ function GridBase<T extends GridProps>(props: T): React.ReactElement<T> {
     {
       [classes.container]: container,
       [classes.containerRow]:
-        container &&
-        !item &&
-        (direction === "row" || direction === "row-reverse"),
+        container && (direction === "row" || direction === "row-reverse"),
       [classes.containerColumn]:
-        container &&
-        !item &&
-        (direction === "column" || direction === "column-reverse"),
+        container && (direction === "column" || direction === "column-reverse"),
       [classes.item]: item,
       [classes.maximize]: maximize,
       [classes.relative]: relative,
