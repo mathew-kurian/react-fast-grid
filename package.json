@@ -34,12 +34,13 @@
   "homepage": "https://github.com/mathew-kurian/react-fast-grid#readme",
   "description": "Useful Grid algorithm from Material-UI (https://github.com/mui-org/material-ui)",
   "dependencies": {
-    "clsx": "1.1.0"
+    "clsx": "^1.1.0",
+    "jss-preset-default": "^10.3.0",
+    "jss": "^10.3.0"
   },
   "peerDependencies": {
     "react": ">=15",
-    "react-dom": ">=15",
-    "react-jss": ">=8.6.1"
+    "react-dom": ">=15"
   },
   "devDependencies": {
     "@babel/core": "^7.11.0",
@@ -69,7 +70,6 @@
     "react-dom": ">=15",
     "react-fast-grid": "latest",
     "react-icons": "^3.9.0",
-    "react-jss": ">=8.6.1",
     "react-test-renderer": "^16.13.1",
     "snapshot-diff": "^0.7.0",
     "style-loader": "^1.2.1",

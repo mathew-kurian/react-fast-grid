@@ -8,7 +8,12 @@
   font-family: Roboto;
 }
 
-html, body {
+input {
+  margin-bottom: 0 !important;
+}
+
+html,
+body {
   width: 100%;
   height: 100%;
   margin: 0;
